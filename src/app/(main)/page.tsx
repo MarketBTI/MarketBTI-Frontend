@@ -1,5 +1,5 @@
-const page = () => {
+const RiskAssessmentPage = () => {
   return <div></div>;
 };
 
-export default page;
+export default RiskAssessmentPage;

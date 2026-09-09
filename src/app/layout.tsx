@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { QueryProvider } from '@/app/_providers/QueryProvider';
-import './globals.css';
-import './theme.css';
+import './styles/globals.css';
+import './styles/theme.css';
 
 const pretendardJP = localFont({
   src: '../assets/fonts/PretendardJPVariable.woff2',
