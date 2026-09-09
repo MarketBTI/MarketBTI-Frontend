@@ -1,5 +1,6 @@
 import Button from '@/shared/components/button/Button';
 import styles from './page.module.css';
+import { Maximize } from 'lucide-react';
 
 const variants = ['primary', 'outline', 'selection'] as const;
 const sizes = ['sm', 'md', 'lg'] as const;
@@ -21,7 +22,13 @@ export default function ExamplePage() {
             <h2 className={styles.variantTitle}>{variant}</h2>
             <div className={styles.buttonRow}>
               {sizes.map((size) => (
-                <Button key={size} label={`Button ${size}`} variant={variant} size={size} />
+                <Button
+                  key={size}
+                  label='Button'
+                  variant={variant}
+                  size={size}
+                  icon={<Maximize />}
+                />
               ))}
               <Button label='Disabled' variant={variant} size='lg' disabled />
             </div>

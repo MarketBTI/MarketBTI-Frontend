@@ -2,10 +2,18 @@ import { recipe } from '@vanilla-extract/recipes';
 import { textStyles, vars } from '@/app/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
+export const iconWrapper = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexShrink: 0,
+  lineHeight: 0,
+});
+
 const buttonSizeStyles = {
   sm: style([textStyles.body2, { height: '36px' }]),
   md: style([textStyles.subtitle2, { height: '44px' }]),
-  lg: style([textStyles.title3, { minHeight: '52px' }]),
+  lg: style([textStyles.title3, { height: '52px' }]),
 };
 
 export const buttonRecipe = recipe({

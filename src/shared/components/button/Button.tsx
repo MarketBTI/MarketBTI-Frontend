@@ -1,7 +1,14 @@
 'use client';
 
 import clsx from 'clsx';
-import { buttonRecipe } from './Button.css';
+import { buttonRecipe, iconWrapper } from './Button.css';
+import React from 'react';
+
+const iconSizes = {
+  sm: 16,
+  md: 18,
+  lg: 20,
+} as const;
 
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
@@ -24,6 +31,8 @@ const Button = ({
   variant = 'primary',
   size = 'md',
 }: ButtonProps) => {
+  const iconSize = iconSizes[size];
+
   return (
     <button
       type={type}
@@ -32,7 +41,15 @@ const Button = ({
       disabled={disabled}
       className={clsx(buttonRecipe({ variant, size }), className)}
     >
-      {icon && <span>{icon}</span>}
+      {icon && (
+        <span aria-hidden='true' className={iconWrapper}>
+          {React.isValidElement(icon)
+            ? React.cloneElement(icon as React.ReactElement<{ size?: number }>, {
+                size: iconSize,
+              })
+            : icon}
+        </span>
+      )}
       {label}
     </button>
   );
