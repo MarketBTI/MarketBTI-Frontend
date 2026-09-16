@@ -4,6 +4,7 @@ import Input from '@/shared/components/input/Input';
 import SidebarTab from '@/shared/components/navigation/SidebarTab';
 import SectionNav from '@/shared/components/navigation/SectionNav';
 import styles from './page.module.css';
+import ToastExample from './ToastExample';
 import { Maximize } from 'lucide-react';
 
 const variants = ['primary', 'outline', 'selection'] as const;
@@ -87,6 +88,16 @@ export default function ExamplePage() {
           <h3 className={styles.variantTitle}>하위 단계</h3>
           <SectionNav title='마이페이지' subTitle='프로필 수정' subStep />
         </div>
+      </section>
+      <section className={styles.showcase} aria-labelledby='toast-showcase-title'>
+        <h2 id='toast-showcase-title' className={styles.title}>
+          Toast
+        </h2>
+        <p className={styles.description}>
+          버튼을 누르면 화면 하단 중앙에 토스트가 표시됩니다. 4초 뒤 자동으로 닫히거나 X 버튼으로
+          닫을 수 있습니다.
+        </p>
+        <ToastExample />
       </section>
     </main>
   );
