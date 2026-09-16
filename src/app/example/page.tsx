@@ -2,6 +2,7 @@ import Button from '@/shared/components/button/Button';
 import Chip from '@/shared/components/chip/Chip';
 import Input from '@/shared/components/input/Input';
 import SidebarTab from '@/shared/components/navigation/SidebarTab';
+import SectionNav from '@/shared/components/navigation/SectionNav';
 import styles from './page.module.css';
 import { Maximize } from 'lucide-react';
 
@@ -71,6 +72,20 @@ export default function ExamplePage() {
             <SidebarTab label='텍스트' icon={<Maximize size={18} />} />
           </div>
           <SidebarTab label='텍스트' icon={<Maximize size={18} />} isCollapsed />
+        </div>
+      </section>
+      <section className={styles.showcase} aria-labelledby='section-nav-showcase-title'>
+        <h2 id='section-nav-showcase-title' className={styles.title}>
+          SectionNav
+        </h2>
+        <p className={styles.description}>제목만 표시하는 형태와 하위 단계를 표시하는 형태입니다.</p>
+        <div className={styles.variantSection}>
+          <h3 className={styles.variantTitle}>기본</h3>
+          <SectionNav title='마이페이지' />
+        </div>
+        <div className={styles.variantSection}>
+          <h3 className={styles.variantTitle}>하위 단계</h3>
+          <SectionNav title='마이페이지' subTitle='프로필 수정' subStep />
         </div>
       </section>
     </main>

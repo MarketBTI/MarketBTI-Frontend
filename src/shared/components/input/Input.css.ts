@@ -22,7 +22,7 @@ export const icon = style({
   color: vars.color.neutral[800],
 });
 
-export const input = style([
+export const inputStyles = style([
   textStyles.body3,
   {
     flex: 1,

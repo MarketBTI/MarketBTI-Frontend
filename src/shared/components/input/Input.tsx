@@ -30,7 +30,7 @@ const Input = ({ value, onChange, className, type = 'text', ...props }: InputPro
         {...props}
         ref={inputRef}
         type={type}
-        className={styles.input}
+        className={styles.inputStyles}
         value={currentValue}
         onChange={(e) => updateValue(e.target.value)}
       />
