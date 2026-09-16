@@ -85,7 +85,7 @@ createGlobalTheme(':root', vars, {
     black: '#111111',
     white: '#FFFFFF',
     primary: {
-      100: '#E9F8F1',
+      100: '#F5FCF9',
       200: '#E0F6EC',
       300: '#BCE6D3',
       400: '#A2DDC4',

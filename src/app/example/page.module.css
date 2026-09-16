@@ -60,3 +60,15 @@
   align-items: center;
   gap: var(--space-3);
 }
+
+.sidebarTabRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.sidebarTabExpanded {
+  width: 292px;
+  max-width: 100%;
+}

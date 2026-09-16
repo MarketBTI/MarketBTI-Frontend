@@ -13,7 +13,7 @@ const iconSizes = {
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
-  label?: string;
+  label: string;
   disabled?: boolean;
   className?: string;
   icon?: React.ReactNode;

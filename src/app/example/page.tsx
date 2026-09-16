@@ -1,6 +1,7 @@
 import Button from '@/shared/components/button/Button';
 import Chip from '@/shared/components/chip/Chip';
 import Input from '@/shared/components/input/Input';
+import SidebarTab from '@/shared/components/navigation/SidebarTab';
 import styles from './page.module.css';
 import { Maximize } from 'lucide-react';
 
@@ -56,6 +57,20 @@ export default function ExamplePage() {
         </p>
         <div className={styles.buttonRow}>
           <Input placeholder='Placeholder' aria-label='검색어' />
+        </div>
+      </section>
+      <section className={styles.showcase} aria-labelledby='sidebar-tab-showcase-title'>
+        <h2 id='sidebar-tab-showcase-title' className={styles.title}>
+          SidebarTab
+        </h2>
+        <p className={styles.description}>
+          마우스를 올리면 배경색이 바뀝니다. 사이드바를 접으면 아이콘만 표시됩니다.
+        </p>
+        <div className={styles.sidebarTabRow}>
+          <div className={styles.sidebarTabExpanded}>
+            <SidebarTab label='텍스트' icon={<Maximize size={18} />} />
+          </div>
+          <SidebarTab label='텍스트' icon={<Maximize size={18} />} isCollapsed />
         </div>
       </section>
     </main>
