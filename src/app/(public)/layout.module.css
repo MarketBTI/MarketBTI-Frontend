@@ -1,6 +1,22 @@
+.layout {
+  --sidebar-width: 280px;
+  --sidebar-transition: 250ms ease-in-out;
+}
+
+.layout[data-collapsed] {
+  --sidebar-width: 76px;
+}
+
 .content {
   min-height: 100vh;
-  margin-left: 280px;
+  margin-left: var(--sidebar-width);
   padding-top: 60px;
   background-color: var(--color-neutral-100);
+  transition: margin-left var(--sidebar-transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layout {
+    --sidebar-transition: 0ms;
+  }
 }

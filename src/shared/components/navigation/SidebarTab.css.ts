@@ -25,6 +25,12 @@ export const sidebarTab = style([
       outlineOffset: 2,
     },
     selectors: {
+      '&[data-collapsed]': {
+        justifyContent: 'center',
+        gap: 0,
+        width: '44px',
+        height: '44px',
+      },
       '&[data-active]': {
         backgroundColor: vars.color.primary[200],
         color: vars.color.primary[900],

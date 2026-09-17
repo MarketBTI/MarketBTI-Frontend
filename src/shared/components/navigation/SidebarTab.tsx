@@ -9,9 +9,10 @@ interface SidebarTabProps {
   label: string;
   icon: ReactNode;
   href: string;
+  isCollapsed?: boolean;
 }
 
-const SidebarTab = ({ label, icon, href }: SidebarTabProps) => {
+const SidebarTab = ({ label, icon, href, isCollapsed = false }: SidebarTabProps) => {
   const pathname = usePathname();
   const isActive = pathname === href;
 
@@ -20,12 +21,15 @@ const SidebarTab = ({ label, icon, href }: SidebarTabProps) => {
       href={href}
       className={styles.sidebarTab}
       data-active={isActive || undefined}
+      data-collapsed={isCollapsed || undefined}
+      aria-label={label}
+      title={isCollapsed ? label : undefined}
       aria-current={isActive ? 'page' : undefined}
     >
       <span className={styles.icon} aria-hidden='true'>
         {icon}
       </span>
-      <span>{label}</span>
+      {!isCollapsed && <span>{label}</span>}
     </Link>
   );
 };

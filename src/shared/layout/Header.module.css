@@ -2,7 +2,8 @@
   position: fixed;
   top: 0;
   right: 0;
-  left: 280px;
+  left: var(--sidebar-width, 280px);
+  transition: left var(--sidebar-transition, 250ms ease-in-out);
   z-index: 10;
   height: 60px;
   background: #fff;
