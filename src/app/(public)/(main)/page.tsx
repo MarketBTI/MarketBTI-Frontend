@@ -1,5 +1,11 @@
+import styles from './page.module.css';
+
 const RiskAssessmentPage = () => {
-  return <div></div>;
+  return (
+    <div className={styles.page}>
+      <div className={styles.panel} />
+    </div>
+  );
 };
 
 export default RiskAssessmentPage;

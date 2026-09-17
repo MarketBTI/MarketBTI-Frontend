@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css';
 import { textStyles, vars } from '@/app/styles/theme.css';
 
 export const sidebarTab = style([
-  textStyles.title2,
+  textStyles.subtitle2,
   {
     display: 'flex',
     alignItems: 'center',

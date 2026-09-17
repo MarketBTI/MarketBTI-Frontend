@@ -2,7 +2,7 @@
 
 import { LogoIcon, SidebarMascotIcon1, SidebarMascotIcon2, SidebarMascotIcon3 } from '@/assets';
 import styles from './Sidebar.module.css';
-import { BookOpen, ChartNoAxesColumnIncreasing, MapPin, PanelLeft } from 'lucide-react';
+import { BookOpen, ChartLine, MapPin, PanelLeft } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import SidebarTab from '../components/navigation/SidebarTab';
 
@@ -25,7 +25,7 @@ const Sidebar = () => {
       </div>
 
       <nav className={styles.navigation} aria-label='주요 메뉴'>
-        <SidebarTab label='상권 진단' icon={<ChartNoAxesColumnIncreasing size={20} />} href='/' />
+        <SidebarTab label='상권 진단' icon={<ChartLine size={20} />} href='/' />
         <SidebarTab label='유형 사전' icon={<BookOpen size={20} />} href='/dictionary' />
         <SidebarTab label='상권 탐색' icon={<MapPin size={20} />} href='/search' />
       </nav>
