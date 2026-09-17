@@ -1,8 +1,43 @@
 .sidebar {
   position: fixed;
   inset: 0 auto 0 0;
-  z-index: 20;
+  z-index: 10;
   width: 280px;
   background: #fff;
   border-right: 1px solid #e5e7eb;
+  padding: var(--space-2) var(--space-4) var(--space-4);
+}
+
+.logo_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.menu_button {
+  display: flex;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--color-neutral-800);
+  transition: background-color 150ms ease-in-out;
+  padding: var(--space-2);
+}
+
+.menu_button:hover {
+  background-color: var(--color-neutral-100);
+}
+
+.menu_button:focus-visible {
+  outline: 2px solid var(--color-primary-700);
+  outline-offset: 2px;
 }
