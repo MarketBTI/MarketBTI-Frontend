@@ -1,11 +1,20 @@
 'use client';
 
-import { LogoIcon, SidebarMascotIcon } from '@/assets';
+import { LogoIcon, SidebarMascotIcon1, SidebarMascotIcon2, SidebarMascotIcon3 } from '@/assets';
 import styles from './Sidebar.module.css';
 import { BookOpen, ChartNoAxesColumnIncreasing, MapPin, PanelLeft } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import SidebarTab from '../components/navigation/SidebarTab';
 
 const Sidebar = () => {
+  const pathname = usePathname();
+  const MascotIcon =
+    pathname === '/dictionary'
+      ? SidebarMascotIcon2
+      : pathname === '/search'
+        ? SidebarMascotIcon3
+        : SidebarMascotIcon1;
+
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo_container}>
@@ -22,7 +31,7 @@ const Sidebar = () => {
       </nav>
 
       <div className={styles.footer}>
-        <SidebarMascotIcon />
+        <MascotIcon className={styles.mascot} aria-hidden='true' />
       </div>
     </aside>
   );
