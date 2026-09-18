@@ -3,7 +3,6 @@
 import { useCallback, useRef, useState } from 'react';
 import Button from '@/shared/components/button/Button';
 import Toast from '@/shared/components/toast/Toast';
-import styles from './page.module.css';
 
 export default function ToastExample() {
   const nextId = useRef(0);
@@ -18,18 +17,24 @@ export default function ToastExample() {
     setToast({
       id: ++nextId.current,
       variant,
-      message: variant === 'success' ? '저장되었습니다.' : '저장하지 못했습니다. 다시 시도해 주세요.',
+      message:
+        variant === 'success' ? '저장되었습니다.' : '저장하지 못했습니다. 다시 시도해 주세요.',
     });
   };
 
   return (
     <>
-      <div className={styles.buttonRow}>
+      <div className='flex flex-wrap items-center gap-3'>
         <Button label='성공 토스트 띄우기' onClick={() => showToast('success')} />
         <Button label='오류 토스트 띄우기' variant='outline' onClick={() => showToast('error')} />
       </div>
       {toast && (
-        <Toast key={toast.id} variant={toast.variant} message={toast.message} onClose={closeToast} />
+        <Toast
+          key={toast.id}
+          variant={toast.variant}
+          message={toast.message}
+          onClose={closeToast}
+        />
       )}
     </>
   );

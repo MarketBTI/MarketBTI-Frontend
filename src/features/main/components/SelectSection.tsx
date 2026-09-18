@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { VillageIcon } from '@/assets';
-import styles from '../styles/SelectSection.module.css';
 import { districtsByRegion, industryOptions, regionOptions } from '../data/selectionOptions';
 import SelectionGroup from './SelectionGroup';
 import IndicatorSection from './IndicatorSection';
@@ -27,9 +26,13 @@ const SelectSection = () => {
   };
 
   return (
-    <div className={styles.selection_layout}>
-      <div className={styles.select_section}>
-        <VillageIcon className={styles.village} aria-hidden='true' focusable='false' />
+    <div className='mt-10 grid grid-cols-[minmax(200px,1fr)_minmax(0,828px)_minmax(200px,1fr)] items-start gap-x-6 gap-y-10 @max-[1100px]:mt-25 @max-[1100px]:grid-cols-[minmax(0,828px)] @max-[1100px]:justify-center'>
+      <div className='relative col-start-2 flex min-w-0 max-w-207 flex-col gap-5 @max-[1100px]:col-start-1'>
+        <VillageIcon
+          className='pointer-events-none absolute top-0 right-2 w-[30%] -translate-y-full'
+          aria-hidden='true'
+          focusable='false'
+        />
         <SelectionGroup
           step={1}
           title='지역 선택'
@@ -66,7 +69,7 @@ const SelectSection = () => {
       <Button
         label='위험 진단 시작하기'
         size='lg'
-        className={styles.start_button}
+        className='col-span-full w-120 max-w-full justify-self-center'
         disabled={!selectedRegion || !selectedDistrict || !selectedIndustry}
       />
     </div>

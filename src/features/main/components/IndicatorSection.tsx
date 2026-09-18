@@ -1,7 +1,5 @@
 import { BookmarkCheck } from 'lucide-react';
-import styles from '../styles/IndicatorSection.module.css';
 import clsx from 'clsx';
-import { textStyles } from '@/app/styles/theme.css';
 
 interface IndicatorSectionProps {
   selectedRegion: string | null;
@@ -24,37 +22,69 @@ const IndicatorSection = ({
     { label: '업종', value: selectedIndustry },
   ];
   return (
-    <aside className={styles.indicator_section} aria-label='진단 진행 상황'>
-      <ol className={styles.steps}>
+    <aside
+      className='col-start-3 flex w-50 max-w-full flex-col gap-4 justify-self-end @max-[1100px]:col-start-1 @max-[1100px]:grid @max-[1100px]:w-full @max-[1100px]:grid-cols-2 @max-[480px]:grid-cols-1'
+      aria-label='진단 진행 상황'
+    >
+      <ol className='m-0 rounded-lg bg-neutral-100 px-6 py-4 shadow-[0_4px_8px_rgb(0_0_0/0.15)]'>
         {steps.map((step, index) => (
           <li
-            className={styles.step}
+            className={clsx(
+              'relative flex min-h-35 gap-2 text-neutral-600 last:min-h-15',
+              index < steps.length - 1 &&
+                'before:absolute before:top-6 before:bottom-0 before:left-2.75 before:w-0.5 before:content-[""]',
+              index === 0
+                ? 'before:bg-[linear-gradient(var(--color-primary-800)_50%,var(--color-neutral-400)_50%)]'
+                : 'before:bg-neutral-400',
+            )}
             key={step.title}
             aria-current={index === 0 ? 'step' : undefined}
           >
-            <span className={styles.step_number}>{index + 1}</span>
+            <span
+              className={clsx(
+                'flex size-6 shrink-0 items-center justify-center rounded-full text-white',
+                index === 0 ? 'bg-primary-800' : 'bg-neutral-400',
+              )}
+            >
+              {index + 1}
+            </span>
             <div>
-              <p className={clsx(textStyles.body2, styles.step_title)}>{step.title}</p>
-              <p className={clsx(textStyles.caption3, styles.step_description)}>
+              <p className={clsx('mt-1 mx-0 mb-1.5 text-body2', index === 0 && 'text-primary-900')}>
+                {step.title}
+              </p>
+              <p className={clsx('m-0 text-caption3', index === 0 && 'text-neutral-800')}>
                 {step.description}
               </p>
             </div>
           </li>
         ))}
       </ol>
-      <section className={styles.conditions} aria-labelledby='selected-conditions-title'>
+      <section
+        className='m-0 rounded-lg bg-primary-100 p-4 text-neutral-900 shadow-[0_4px_8px_rgb(0_0_0/0.15)]'
+        aria-labelledby='selected-conditions-title'
+      >
         <h2
           id='selected-conditions-title'
-          className={clsx(textStyles.body1, styles.conditions_title)}
+          className='m-0 mb-2.5 flex items-center gap-1 text-body1'
         >
-          <BookmarkCheck size={20} aria-hidden='true' />
+          <BookmarkCheck size={20} className='shrink-0 text-primary-800' aria-hidden='true' />
           현재 선택한 조건
         </h2>
-        <dl className={styles.condition_list}>
+        <dl className='m-0 grid gap-2.5'>
           {conditions.map(({ label, value }) => (
-            <div className={clsx(textStyles.caption1, styles.condition)} key={label}>
+            <div
+              className='h-15.5 rounded-md border border-solid border-primary-300 bg-white px-3 py-2 text-caption1'
+              key={label}
+            >
               <dt>{label}</dt>
-              <dd className={clsx(value === null && styles.unselected)}>{value ?? '선택 전'}</dd>
+              <dd
+                className={clsx(
+                  'm-0 mt-2 text-base leading-[inherit]',
+                  value === null ? 'font-medium text-neutral-700' : 'text-primary-900',
+                )}
+              >
+                {value ?? '선택 전'}
+              </dd>
             </div>
           ))}
         </dl>

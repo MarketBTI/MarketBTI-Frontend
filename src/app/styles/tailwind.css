@@ -1,0 +1,204 @@
+/* Keep the existing reset: Preflight would change the vanilla-extract components. */
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@source "../../";
+
+/* These variables are owned by theme.css.ts, so only register their utility names.
+   reference prevents duplicate (and self-referencing) variables in the output CSS. */
+@theme {
+  --color-*: initial;
+}
+@theme reference {
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-300: var(--color-primary-300);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-500: var(--color-primary-500);
+  --color-primary-600: var(--color-primary-600);
+  --color-primary-700: var(--color-primary-700);
+  --color-primary-800: var(--color-primary-800);
+  --color-primary-900: var(--color-primary-900);
+  --color-semantic-100: var(--color-semantic-100);
+  --color-semantic-200: var(--color-semantic-200);
+  --color-semantic-300: var(--color-semantic-300);
+  --color-semantic-400: var(--color-semantic-400);
+  --color-semantic-500: var(--color-semantic-500);
+  --color-semantic-600: var(--color-semantic-600);
+  --color-semantic-700: var(--color-semantic-700);
+  --color-semantic-800: var(--color-semantic-800);
+  --color-semantic-900: var(--color-semantic-900);
+  --color-neutral-100: var(--color-neutral-100);
+  --color-neutral-200: var(--color-neutral-200);
+  --color-neutral-300: var(--color-neutral-300);
+  --color-neutral-400: var(--color-neutral-400);
+  --color-neutral-500: var(--color-neutral-500);
+  --color-neutral-600: var(--color-neutral-600);
+  --color-neutral-700: var(--color-neutral-700);
+  --color-neutral-800: var(--color-neutral-800);
+  --color-neutral-900: var(--color-neutral-900);
+  --color-black: var(--color-black);
+  --color-white: var(--color-white);
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+}
+@theme inline {
+  --font-sans: var(--font-family);
+}
+
+@utility text-headline1 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-headline2 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-headline3 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-headline4 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-title1 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-title2 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-title3 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-title4 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-subtitle1 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-subtitle2 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-subtitle3 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-body1 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-body2 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-body3 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-caption1 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-caption2 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-caption3 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-small1 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+@utility text-small2 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-default);
+  letter-spacing: var(--letter-spacing-default);
+}
