@@ -82,7 +82,12 @@ export const buttonRecipe = recipe({
         color: vars.color.neutral[900],
 
         selectors: {
-          '&:not(:disabled):hover': {
+          '&[aria-pressed=true]:not(:disabled)': {
+            backgroundColor: vars.color.primary[900],
+            borderColor: vars.color.primary[900],
+            color: vars.color.white,
+          },
+          '&:not(:disabled):not([aria-pressed=true]):hover': {
             borderColor: vars.color.primary[500],
             backgroundColor: vars.color.primary[100],
             color: vars.color.neutral[900],

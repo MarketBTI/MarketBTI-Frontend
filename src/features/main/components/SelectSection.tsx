@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import clsx from 'clsx';
 import styles from '../styles/SelectSection.module.css';
 import { textStyles } from '@/app/styles/theme.css';
@@ -22,6 +25,8 @@ const mocks = [
 ];
 
 const SelectSection = () => {
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+
   return (
     <section className={clsx(styles.select_section)}>
       <article className={clsx(textStyles.subtitle2, styles.option_title)}>
@@ -34,6 +39,8 @@ const SelectSection = () => {
           <Button
             key={item}
             label={item}
+            selected={selectedRegion === item}
+            onClick={() => setSelectedRegion(item)}
             variant='selection'
             size='md'
             className={styles.option_button}

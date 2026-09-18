@@ -15,6 +15,7 @@ interface ButtonProps {
   onClick?: () => void;
   label: string;
   disabled?: boolean;
+  selected?: boolean;
   className?: string;
   icon?: React.ReactNode;
   variant?: 'primary' | 'outline' | 'selection';
@@ -26,6 +27,7 @@ const Button = ({
   onClick,
   label,
   disabled = false,
+  selected,
   className,
   icon,
   variant = 'primary',
@@ -37,6 +39,7 @@ const Button = ({
     <button
       type={type}
       aria-label={label}
+      aria-pressed={selected}
       onClick={onClick}
       disabled={disabled}
       className={clsx(buttonRecipe({ variant, size }), className)}
