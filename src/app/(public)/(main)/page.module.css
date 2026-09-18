@@ -5,6 +5,7 @@
 }
 
 .panel {
+  container-type: inline-size;
   flex: 1;
   min-width: 0;
   border-radius: 16px;

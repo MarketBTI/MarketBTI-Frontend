@@ -1,12 +1,19 @@
+.selection_layout {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) minmax(0, 828px) minmax(200px, 1fr);
+  align-items: start;
+  column-gap: 24px;
+  margin-top: 40px;
+}
 .select_section {
+  grid-column: 2;
+  min-width: 0;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
   max-width: 828px;
-  margin-top: 40px;
 }
-
 .village {
   position: absolute;
   top: 0;
@@ -14,4 +21,15 @@
   width: 30%;
   transform: translateY(-100%);
   pointer-events: none;
+}
+@container (max-width: 1100px) {
+  .selection_layout {
+    grid-template-columns: minmax(0, 828px);
+    justify-content: center;
+    row-gap: 24px;
+    margin-top: 100px;
+  }
+  .select_section {
+    grid-column: 1;
+  }
 }

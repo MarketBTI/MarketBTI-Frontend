@@ -5,6 +5,7 @@ import { VillageIcon } from '@/assets';
 import styles from '../styles/SelectSection.module.css';
 import { districtsByRegion, industryOptions, regionOptions } from '../data/selectionOptions';
 import SelectionGroup from './SelectionGroup';
+import IndicatorSection from './IndicatorSection';
 
 const SelectSection = () => {
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
@@ -25,35 +26,42 @@ const SelectSection = () => {
   };
 
   return (
-    <div className={styles.select_section}>
-      <VillageIcon className={styles.village} aria-hidden='true' focusable='false' />
-      <SelectionGroup
-        step={1}
-        title='지역 선택'
-        options={regionOptions}
-        selected={selectedRegion}
-        onSelect={selectRegion}
+    <div className={styles.selection_layout}>
+      <div className={styles.select_section}>
+        <VillageIcon className={styles.village} aria-hidden='true' focusable='false' />
+        <SelectionGroup
+          step={1}
+          title='지역 선택'
+          options={regionOptions}
+          selected={selectedRegion}
+          onSelect={selectRegion}
+        />
+        {selectedRegion && (
+          <SelectionGroup
+            key={selectedRegion}
+            step={2}
+            title='시·구·군 선택'
+            options={districtsByRegion[selectedRegion]}
+            selected={selectedDistrict}
+            onSelect={selectDistrict}
+          />
+        )}
+        {selectedRegion && selectedDistrict && (
+          <SelectionGroup
+            key={`${selectedRegion}-${selectedDistrict}`}
+            step={3}
+            title='업종 선택'
+            options={industryOptions}
+            selected={selectedIndustry}
+            onSelect={setSelectedIndustry}
+          />
+        )}
+      </div>
+      <IndicatorSection
+        selectedRegion={selectedRegion}
+        selectedDistrict={selectedDistrict}
+        selectedIndustry={selectedIndustry}
       />
-      {selectedRegion && (
-        <SelectionGroup
-          key={selectedRegion}
-          step={2}
-          title='시·구·군 선택'
-          options={districtsByRegion[selectedRegion]}
-          selected={selectedDistrict}
-          onSelect={selectDistrict}
-        />
-      )}
-      {selectedRegion && selectedDistrict && (
-        <SelectionGroup
-          key={`${selectedRegion}-${selectedDistrict}`}
-          step={3}
-          title='업종 선택'
-          options={industryOptions}
-          selected={selectedIndustry}
-          onSelect={setSelectedIndustry}
-        />
-      )}
     </div>
   );
 };
