@@ -3,6 +3,7 @@
   grid-template-columns: minmax(200px, 1fr) minmax(0, 828px) minmax(200px, 1fr);
   align-items: start;
   column-gap: 24px;
+  row-gap: 40px;
   margin-top: 40px;
 }
 .select_section {
@@ -22,11 +23,18 @@
   transform: translateY(-100%);
   pointer-events: none;
 }
+.start_button {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 480px;
+  max-width: 100%;
+}
+
 @container (max-width: 1100px) {
   .selection_layout {
     grid-template-columns: minmax(0, 828px);
     justify-content: center;
-    row-gap: 24px;
+    row-gap: 40px;
     margin-top: 100px;
   }
   .select_section {

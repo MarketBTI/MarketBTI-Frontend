@@ -6,6 +6,7 @@ import styles from '../styles/SelectSection.module.css';
 import { districtsByRegion, industryOptions, regionOptions } from '../data/selectionOptions';
 import SelectionGroup from './SelectionGroup';
 import IndicatorSection from './IndicatorSection';
+import Button from '@/shared/components/button/Button';
 
 const SelectSection = () => {
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
@@ -61,6 +62,12 @@ const SelectSection = () => {
         selectedRegion={selectedRegion}
         selectedDistrict={selectedDistrict}
         selectedIndustry={selectedIndustry}
+      />
+      <Button
+        label='위험 진단 시작하기'
+        size='lg'
+        className={styles.start_button}
+        disabled={!selectedRegion || !selectedDistrict || !selectedIndustry}
       />
     </div>
   );
