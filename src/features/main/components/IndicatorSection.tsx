@@ -54,7 +54,7 @@ const IndicatorSection = ({
           {conditions.map(({ label, value }) => (
             <div className={clsx(textStyles.caption1, styles.condition)} key={label}>
               <dt>{label}</dt>
-              <dd>{value ?? '선택 전'}</dd>
+              <dd className={clsx(value === null && styles.unselected)}>{value ?? '선택 전'}</dd>
             </div>
           ))}
         </dl>

@@ -116,6 +116,11 @@
   font-size: 16px;
 }
 
+.condition dd.unselected {
+  color: var(--color-neutral-700);
+  font-weight: 500;
+}
+
 @container (max-width: 1100px) {
   .indicator_section {
     grid-column: 1;
