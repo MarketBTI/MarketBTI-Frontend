@@ -1,7 +1,17 @@
 .select_section {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
   max-width: 828px;
   margin-top: 40px;
+}
+
+.village {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  width: 30%;
+  transform: translateY(-100%);
+  pointer-events: none;
 }

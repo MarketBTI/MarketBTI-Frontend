@@ -28,6 +28,9 @@ export const buttonRecipe = recipe({
     transition:
       'background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out',
     whiteSpace: 'nowrap',
+    ':focus-visible': {
+      outline: `1px solid ${vars.color.primary[700]}`,
+    },
 
     selectors: {
       '&:disabled': {

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { VillageIcon } from '@/assets';
 import styles from '../styles/SelectSection.module.css';
 import { districtsByRegion, industryOptions, regionOptions } from '../data/selectionOptions';
 import SelectionGroup from './SelectionGroup';
@@ -25,6 +26,7 @@ const SelectSection = () => {
 
   return (
     <div className={styles.select_section}>
+      <VillageIcon className={styles.village} aria-hidden='true' focusable='false' />
       <SelectionGroup
         step={1}
         title='지역 선택'
