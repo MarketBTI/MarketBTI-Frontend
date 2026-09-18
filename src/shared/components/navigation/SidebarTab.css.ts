@@ -9,7 +9,7 @@ export const sidebarTab = style([
     gap: vars.space[3],
     width: '100%',
     height: '44px',
-    padding: `0 ${vars.space[4]}`,
+    padding: `0 ${vars.space[3]}`,
     borderRadius: vars.radius.lg,
     backgroundColor: 'transparent',
     color: vars.color.neutral[900],
@@ -26,9 +26,9 @@ export const sidebarTab = style([
     },
     selectors: {
       '&[data-collapsed]': {
-        justifyContent: 'center',
-        gap: 0,
-        width: '44px',
+        justifyContent: 'start',
+        width: '100%',
+        minWidth: '44px',
         height: '44px',
       },
       '&[data-active]': {

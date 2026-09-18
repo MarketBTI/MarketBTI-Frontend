@@ -9,4 +9,5 @@
   min-width: 0;
   border-radius: 16px;
   background: var(--color-white);
+  padding: var(--space-8);
 }
