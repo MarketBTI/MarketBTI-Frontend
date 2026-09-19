@@ -1,5 +1,5 @@
-import { atom } from 'jotai';
+import { atomWithReset } from 'jotai/utils';
 
-export const selectedRegionAtom = atom<string | null>(null);
-export const selectedDistrictAtom = atom<string | null>(null);
-export const selectedIndustryAtom = atom<string | null>(null);
+export const selectedRegionAtom = atomWithReset<string | null>(null);
+export const selectedDistrictAtom = atomWithReset<string | null>(null);
+export const selectedIndustryAtom = atomWithReset<string | null>(null);
