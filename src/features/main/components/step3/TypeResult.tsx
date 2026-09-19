@@ -59,7 +59,7 @@ const TypeResult = () => {
         </article>
       </div>
 
-      <div className='w-full bg-primary-100 rounded-xl px-4 py-3 space-y-2'>
+      <div className='w-full bg-primary-100 rounded-xl p-4 space-y-2'>
         <div className='flex items-center gap-1 text-[#503ED5]'>
           <BookAlert size={20} />
           <p className='typo-body-1'>AI 해석</p>
