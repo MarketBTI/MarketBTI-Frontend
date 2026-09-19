@@ -9,4 +9,4 @@ export { default as LodingBackgroundIcon } from './icons/LodingBackground.svg';
 export { default as CompleteCircleIcon } from './icons/CompleteCircle.svg';
 
 // character
-export { default as GCFVIcon } from './icons/GCFV.svg';
+export { default as GCFVIcon } from './icons/character/GCFV.svg';

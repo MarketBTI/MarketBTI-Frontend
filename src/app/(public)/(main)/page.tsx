@@ -9,7 +9,7 @@ const MainPage = async ({ searchParams }: PageProps<'/'>) => {
   const currentStep = step === '2' ? 2 : step === '3' ? 3 : 1;
 
   return (
-    <div className='relative flex min-h-[calc(100dvh-100px)] flex-col gap-10 rounded-xl bg-white p-8'>
+    <div className='flex min-h-[calc(100dvh-100px)] flex-col gap-10 overflow-x-auto rounded-xl bg-white p-8'>
       {currentStep === 1 && (
         <TitleHeader
           title={
@@ -22,6 +22,8 @@ const MainPage = async ({ searchParams }: PageProps<'/'>) => {
         />
       )}
 
+      {currentStep === 2 && <div className='h-14 shrink-0' aria-hidden='true' />}
+
       {currentStep === 3 && (
         <TitleHeader
           title='상권 진단 결과'
@@ -29,13 +31,14 @@ const MainPage = async ({ searchParams }: PageProps<'/'>) => {
         />
       )}
 
-      <div className='flex flex-1 justify-center'>
-        {currentStep === 1 && <SelectionSection />}
-        {currentStep === 2 && <DiagnosingSection />}
-        {currentStep === 3 && <ResultSection />}
+      <div className='grid min-w-265 flex-1 grid-cols-[minmax(0,1fr)_200px] items-start gap-8'>
+        <div className='flex min-w-0 justify-center'>
+          {currentStep === 1 && <SelectionSection />}
+          {currentStep === 2 && <DiagnosingSection />}
+          {currentStep === 3 && <ResultSection />}
+        </div>
+        <IndicatorSection currentStep={currentStep} />
       </div>
-
-      <IndicatorSection currentStep={currentStep} />
     </div>
   );
 };

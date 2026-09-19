@@ -57,7 +57,7 @@ const DiagnosingSection = () => {
 
   return (
     <section
-      className='flex w-full flex-col items-center pr-32 pb-8'
+      className='-mt-20 flex w-full flex-col items-center pb-8'
       aria-label='상권 위험 진단 중'
     >
       <div className='relative isolate h-80 w-full' aria-hidden='true'>

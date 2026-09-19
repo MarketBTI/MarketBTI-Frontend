@@ -31,7 +31,7 @@ const IndicatorSection = ({ currentStep }: IndicatorSectionProps) => {
   ];
 
   return (
-    <section className='absolute top-32 right-8 z-10 space-y-4'>
+    <section className='w-50 space-y-4'>
       <ol className='flex h-98 w-50 flex-col rounded-xl bg-neutral-100 border border-neutral-200 px-6 py-5 shadow-[0_4px_12px_0_rgba(0,0,0,0.15)]'>
         {steps.map((step, index) => (
           <li
