@@ -1,8 +1,8 @@
 'use client';
 
+import clsx from 'clsx';
 import { usePathname, useSearchParams } from 'next/navigation';
 import SectionNav from '../components/navigation/SectionNav';
-import clsx from 'clsx';
 
 interface HeaderProps {
   isCollapsed: boolean;

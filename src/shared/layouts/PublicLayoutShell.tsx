@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type ReactNode } from 'react';
+import { Suspense, useState, type ReactNode } from 'react';
 import clsx from 'clsx';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -23,7 +23,9 @@ const PublicLayoutShell = ({ children }: PublicLayoutShellProps) => {
         isCollapsed={isCollapsed}
         onToggle={() => setIsCollapsed((collapsed) => !collapsed)}
       />
-      <Header isCollapsed={isCollapsed} />
+      <Suspense fallback={null}>
+        <Header isCollapsed={isCollapsed} />
+      </Suspense>
       <main className='min-h-dvh bg-neutral-100 px-5 pt-20 pb-5'>{children}</main>
     </div>
   );
