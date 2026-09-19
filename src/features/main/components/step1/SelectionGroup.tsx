@@ -18,7 +18,7 @@ const SelectionGroup = ({ step, title, options, selected, onSelect }: SelectionG
       aria-labelledby={titleId}
       className={clsx(
         'flex flex-col gap-3 rounded-xl border border-neutral-400 bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] px-5 py-6',
-        step === 1 ? 'h-58' : 'h-47',
+        step === 1 ? 'h-60' : 'h-49',
       )}
     >
       <article className='flex shrink-0 items-center gap-2'>
@@ -35,7 +35,7 @@ const SelectionGroup = ({ step, title, options, selected, onSelect }: SelectionG
 
       <article
         className={clsx(
-          'grid min-h-0 flex-1 gap-3 overflow-y-auto overscroll-contain thin-scrollbar',
+          'grid min-h-0 flex-1 gap-3 overflow-y-auto overscroll-contain thin-scrollbar py-1',
           step === 1 ? 'grid-cols-5' : 'grid-cols-6',
         )}
       >

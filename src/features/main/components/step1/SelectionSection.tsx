@@ -9,8 +9,11 @@ import {
 } from '@/features/main/mocks/selectionOptions';
 import { VillageIcon } from '@/assets';
 import Button from '@/shared/components/button/Button';
+import { useRouter } from 'next/navigation';
 
 const SelectionSection = () => {
+  const router = useRouter();
+
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
@@ -70,6 +73,7 @@ const SelectionSection = () => {
           label='위험 진단 시작하기'
           size='lg'
           className='w-120'
+          onClick={() => router.push('/?step=2')}
           disabled={!selectedRegion || !selectedDistrict || !selectedIndustry}
         />
       </div>

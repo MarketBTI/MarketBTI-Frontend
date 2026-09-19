@@ -24,7 +24,7 @@ const PublicLayoutShell = ({ children }: PublicLayoutShellProps) => {
         onToggle={() => setIsCollapsed((collapsed) => !collapsed)}
       />
       <Header isCollapsed={isCollapsed} />
-      <main className='min-h-dvh bg-neutral-100 px-5 pt-20'>{children}</main>
+      <main className='min-h-dvh bg-neutral-100 px-5 pt-20 pb-5'>{children}</main>
     </div>
   );
 };

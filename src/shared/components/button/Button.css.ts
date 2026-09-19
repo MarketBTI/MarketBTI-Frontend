@@ -30,8 +30,7 @@ export const buttonRecipe = recipe({
     whiteSpace: 'nowrap',
     cursor: 'pointer',
     ':focus-visible': {
-      outline: `2px solid ${vars.color.primary[700]}`,
-      outlineOffset: 2,
+      outline: `1px solid ${vars.color.primary[700]}`,
     },
     '@media': {
       '(prefers-reduced-motion: reduce)': { transition: 'none' },
