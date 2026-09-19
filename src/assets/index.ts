@@ -7,3 +7,6 @@ export { default as VillageIcon } from './icons/Village.svg';
 export { default as LodingMascotIcon } from './icons/LodingMascot.svg';
 export { default as LodingBackgroundIcon } from './icons/LodingBackground.svg';
 export { default as CompleteCircleIcon } from './icons/CompleteCircle.svg';
+
+// character
+export { default as GCFVIcon } from './icons/GCFV.svg';

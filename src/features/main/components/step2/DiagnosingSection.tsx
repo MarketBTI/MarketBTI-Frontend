@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CompleteCircleIcon, LodingBackgroundIcon, LodingMascotIcon } from '@/assets';
 import { motion, useReducedMotion } from 'framer-motion';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { Circle, LoaderCircle } from 'lucide-react';
+import { analysisCompletedToastAtom } from '@/features/main/atoms/analysisAtoms';
 import {
   selectedDistrictAtom,
   selectedIndustryAtom,
@@ -20,6 +21,7 @@ const analysisTasks = [
 
 const DiagnosingSection = () => {
   const router = useRouter();
+  const setAnalysisCompletedToast = useSetAtom(analysisCompletedToastAtom);
   const shouldReduceMotion = useReducedMotion();
 
   const selectedRegion = useAtomValue(selectedRegionAtom);
@@ -42,11 +44,12 @@ const DiagnosingSection = () => {
     if (progress < 100) return;
 
     const timeoutId = window.setTimeout(() => {
+      setAnalysisCompletedToast(true);
       router.replace('/?step=3');
     }, 3000);
 
     return () => window.clearTimeout(timeoutId);
-  }, [progress, router]);
+  }, [progress, router, setAnalysisCompletedToast]);
 
   const selectedCondition = [selectedRegion, selectedDistrict, selectedIndustry]
     .filter((value): value is string => value !== null)
