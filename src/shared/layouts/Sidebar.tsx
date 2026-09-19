@@ -89,7 +89,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
 
       <div
         className={clsx(
-          'mt-auto shrink-0 p-4 transition-opacity duration-200 ease-in-out motion-reduce:transition-none',
+          'mt-auto shrink-0 flex items-center justify-center pb-4 transition-opacity duration-200 ease-in-out motion-reduce:transition-none',
           isCollapsed ? 'pointer-events-none opacity-0' : 'opacity-100',
         )}
         aria-hidden={isCollapsed}
