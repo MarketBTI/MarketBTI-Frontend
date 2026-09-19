@@ -1,7 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useAtom } from 'jotai';
 import SelectionGroup from './SelectionGroup';
+import {
+  selectedDistrictAtom,
+  selectedIndustryAtom,
+  selectedRegionAtom,
+} from '@/features/main/atoms/selectionAtoms';
 import {
   districtsByRegion,
   industryOptions,
@@ -14,9 +19,9 @@ import { useRouter } from 'next/navigation';
 const SelectionSection = () => {
   const router = useRouter();
 
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
-  const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
-  const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
+  const [selectedRegion, setSelectedRegion] = useAtom(selectedRegionAtom);
+  const [selectedDistrict, setSelectedDistrict] = useAtom(selectedDistrictAtom);
+  const [selectedIndustry, setSelectedIndustry] = useAtom(selectedIndustryAtom);
 
   const selectRegion = (region: string) => {
     if (region === selectedRegion) return;

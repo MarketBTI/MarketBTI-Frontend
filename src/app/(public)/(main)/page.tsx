@@ -1,3 +1,4 @@
+import IndicatorSection from '@/features/main/components/IndicatorSection';
 import SelectionSection from '@/features/main/components/step1/SelectionSection';
 import DiagnosingSection from '@/features/main/components/step2/DiagnosingSection';
 import ResultSection from '@/features/main/components/step3/ResultSection';
@@ -8,7 +9,7 @@ const MainPage = async ({ searchParams }: PageProps<'/'>) => {
   const currentStep = step === '2' ? 2 : step === '3' ? 3 : 1;
 
   return (
-    <div className='flex min-h-[calc(100dvh-100px)] flex-col gap-10 rounded-xl bg-white p-8'>
+    <div className='relative flex min-h-[calc(100dvh-100px)] flex-col gap-10 rounded-xl bg-white p-8'>
       {currentStep === 1 && (
         <TitleHeader
           title={
@@ -21,11 +22,20 @@ const MainPage = async ({ searchParams }: PageProps<'/'>) => {
         />
       )}
 
+      {currentStep === 3 && (
+        <TitleHeader
+          title='상권 진단 결과'
+          subtitle='2026년 1월 - 6월 소비데이터 기준 선택한 상권의 분석 결과입니다.'
+        />
+      )}
+
       <div className='flex flex-1 justify-center'>
         {currentStep === 1 && <SelectionSection />}
         {currentStep === 2 && <DiagnosingSection />}
         {currentStep === 3 && <ResultSection />}
       </div>
+
+      <IndicatorSection currentStep={currentStep} />
     </div>
   );
 };
