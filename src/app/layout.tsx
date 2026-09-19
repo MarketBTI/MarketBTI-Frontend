@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { QueryProvider } from '@/app/_providers/QueryProvider';
-import './styles/globals.css';
+import './globals.css';
 import './styles/theme.css';
 
 const pretendardJP = localFont({

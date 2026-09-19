@@ -34,14 +34,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Styling
-
-- Pages, feature components, and shared layouts use Tailwind CSS v4.
-- Shared UI components in src/shared/components keep their vanilla-extract recipes.
-- src/app/styles/theme.css.ts owns the design tokens for both systems.
-- src/app/styles/tailwind.css registers those tokens with @theme reference, without emitting duplicate CSS variables. Use text-primary-900, bg-neutral-100, border-primary-300, and rounded-lg (12px), for example.
-- Typography utilities match the existing textStyles names: text-headline1, text-title3, text-subtitle2, text-body1, text-caption3, etc.
-- Tailwind Preflight is deliberately omitted to preserve the existing reset and shared component appearance.
-- Tailwind utilities are layered while vanilla-extract recipes are unlayered. For an intentional override of a shared component property, use a targeted important utility such as px-1! or whitespace-normal!. Layout properties not set by the recipe do not need this.
-- Panel responsiveness uses container queries (@container and @max-[1100px]) so the layout also responds to sidebar expansion.

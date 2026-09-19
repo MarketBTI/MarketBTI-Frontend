@@ -13,11 +13,11 @@ export default function ExamplePage() {
   return (
     <main className='min-h-dvh bg-neutral-100 px-4 py-8'>
       <section
-        className='mx-auto w-full max-w-[720px] rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
+        className='mx-auto w-full max-w-180 rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
         aria-labelledby='button-showcase-title'
       >
-        <p className='m-0 mb-2 text-caption1 text-primary-700'>Design system</p>
-        <h1 id='button-showcase-title' className='m-0 mb-3 text-headline1 text-neutral-900'>
+        <p className='m-0 mb-2 typo-caption-1 text-primary-700'>Design system</p>
+        <h1 id='button-showcase-title' className='m-0 mb-3 typo-headline-1 text-neutral-900'>
           Button
         </h1>
         <p className='m-0 mb-8 text-sm leading-normal text-neutral-700'>
@@ -26,7 +26,7 @@ export default function ExamplePage() {
 
         {variants.map((variant) => (
           <section key={variant} className='[&+section]:mt-7 [&+div]:mt-7'>
-            <h2 className='m-0 mb-3 text-body1 text-neutral-800 capitalize'>{variant}</h2>
+            <h2 className='m-0 mb-3 typo-body-1 text-neutral-800 capitalize'>{variant}</h2>
             <div className='flex flex-wrap items-center gap-3'>
               {sizes.map((size) => (
                 <Button
@@ -43,10 +43,10 @@ export default function ExamplePage() {
         ))}
       </section>
       <section
-        className='mx-auto w-full max-w-[720px] rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
+        className='mx-auto w-full max-w-180 rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
         aria-labelledby='chip-showcase-title'
       >
-        <h2 id='chip-showcase-title' className='m-0 mb-3 text-headline1 text-neutral-900'>
+        <h2 id='chip-showcase-title' className='m-0 mb-3 typo-headline-1 text-neutral-900'>
           Chip
         </h2>
         <p className='m-0 mb-8 text-sm leading-normal text-neutral-700'>
@@ -58,10 +58,10 @@ export default function ExamplePage() {
         </div>
       </section>
       <section
-        className='mx-auto w-full max-w-[720px] rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
+        className='mx-auto w-full max-w-180 rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
         aria-labelledby='input-showcase-title'
       >
-        <h2 id='input-showcase-title' className='m-0 mb-3 text-headline1 text-neutral-900'>
+        <h2 id='input-showcase-title' className='m-0 mb-3 typo-headline-1 text-neutral-900'>
           Input
         </h2>
         <p className='m-0 mb-8 text-sm leading-normal text-neutral-700'>
@@ -72,45 +72,53 @@ export default function ExamplePage() {
         </div>
       </section>
       <section
-        className='mx-auto w-full max-w-[720px] rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
+        className='mx-auto w-full max-w-180 rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
         aria-labelledby='sidebar-tab-showcase-title'
       >
-        <h2 id='sidebar-tab-showcase-title' className='m-0 mb-3 text-headline1 text-neutral-900'>
+        <h2 id='sidebar-tab-showcase-title' className='m-0 mb-3 typo-headline-1 text-neutral-900'>
           SidebarTab
         </h2>
         <p className='m-0 mb-8 text-sm leading-normal text-neutral-700'>
           현재 경로에 해당하는 링크는 선택 색상으로 표시됩니다.
         </p>
         <div className='flex flex-wrap items-center gap-6'>
-          <div className='w-[292px] max-w-full'>
+          <div className='w-73 max-w-full'>
             <SidebarTab label='상권 진단' icon={<Maximize size={18} />} href='/' />
+          </div>
+          <div className='w-11 max-w-full'>
+            <SidebarTab
+              label='상권 진단'
+              icon={<Maximize size={18} />}
+              href='/'
+              isCollapsed={true}
+            />
           </div>
         </div>
       </section>
       <section
-        className='mx-auto w-full max-w-[720px] rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
+        className='mx-auto w-full max-w-180 rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
         aria-labelledby='section-nav-showcase-title'
       >
-        <h2 id='section-nav-showcase-title' className='m-0 mb-3 text-headline1 text-neutral-900'>
+        <h2 id='section-nav-showcase-title' className='m-0 mb-3 typo-headline-1 text-neutral-900'>
           SectionNav
         </h2>
         <p className='m-0 mb-8 text-sm leading-normal text-neutral-700'>
           제목만 표시하는 형태와 하위 단계를 표시하는 형태입니다.
         </p>
         <div className='[&+section]:mt-7 [&+div]:mt-7'>
-          <h3 className='m-0 mb-3 text-body1 text-neutral-800 capitalize'>기본</h3>
+          <h3 className='m-0 mb-3 typo-body-1 text-neutral-800 capitalize'>기본</h3>
           <SectionNav title='마이페이지' />
         </div>
         <div className='[&+section]:mt-7 [&+div]:mt-7'>
-          <h3 className='m-0 mb-3 text-body1 text-neutral-800 capitalize'>하위 단계</h3>
+          <h3 className='m-0 mb-3 typo-body-1 text-neutral-800 capitalize'>하위 단계</h3>
           <SectionNav title='마이페이지' subTitle='프로필 수정' subStep />
         </div>
       </section>
       <section
-        className='mx-auto w-full max-w-[720px] rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
+        className='mx-auto w-full max-w-180 rounded-xl border border-solid border-neutral-200 bg-white p-8 [&+section]:mt-6'
         aria-labelledby='toast-showcase-title'
       >
-        <h2 id='toast-showcase-title' className='m-0 mb-3 text-headline1 text-neutral-900'>
+        <h2 id='toast-showcase-title' className='m-0 mb-3 typo-headline-1 text-neutral-900'>
           Toast
         </h2>
         <p className='m-0 mb-8 text-sm leading-normal text-neutral-700'>

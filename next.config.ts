@@ -8,7 +8,7 @@ const withVanillaExtract = createVanillaExtractPlugin({
   },
 });
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   /* config options here */
   reactCompiler: true,
   turbopack: {
@@ -19,23 +19,6 @@ const nextConfig: NextConfig = {
       },
     },
   },
-  webpack: (config) => {
-    const svgRule = config.module.rules.find(
-      (rule: { test?: RegExp; exclude?: RegExp } | string) =>
-        typeof rule === 'object' && rule !== null && rule.test instanceof RegExp && rule.test.test('.svg'),
-    );
-
-    if (svgRule && typeof svgRule === 'object') {
-      svgRule.exclude = /\.svg$/i;
-    }
-
-    config.module.rules.push({
-      test: /\.svg$/i,
-      use: ['@svgr/webpack'],
-    });
-
-    return config;
-  },
-};
+} satisfies NextConfig;
 
 export default withVanillaExtract(nextConfig);

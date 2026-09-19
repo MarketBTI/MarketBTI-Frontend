@@ -28,12 +28,18 @@ export const buttonRecipe = recipe({
     transition:
       'background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out',
     whiteSpace: 'nowrap',
+    cursor: 'pointer',
     ':focus-visible': {
-      outline: `1px solid ${vars.color.primary[700]}`,
+      outline: `2px solid ${vars.color.primary[700]}`,
+      outlineOffset: 2,
+    },
+    '@media': {
+      '(prefers-reduced-motion: reduce)': { transition: 'none' },
     },
 
     selectors: {
       '&:disabled': {
+        cursor: 'not-allowed',
         borderColor: vars.color.neutral[600],
         backgroundColor: vars.color.neutral[600],
         color: vars.color.white,

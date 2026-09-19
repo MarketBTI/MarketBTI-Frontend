@@ -1,8 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
-import { buttonRecipe, iconWrapper } from './Button.css';
 import React from 'react';
+import * as styles from './Button.css';
 
 const iconSizes = {
   sm: 16,
@@ -42,10 +42,10 @@ const Button = ({
       aria-pressed={selected}
       onClick={onClick}
       disabled={disabled}
-      className={clsx(buttonRecipe({ variant, size }), className)}
+      className={clsx(styles.buttonRecipe({ variant, size }), className)}
     >
       {icon && (
-        <span aria-hidden='true' className={iconWrapper}>
+        <span aria-hidden='true' className={styles.iconWrapper}>
           {React.isValidElement(icon)
             ? React.cloneElement(icon as React.ReactElement<{ size?: number }>, {
                 size: iconSize,

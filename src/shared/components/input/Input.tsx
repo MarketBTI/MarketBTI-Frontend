@@ -34,17 +34,19 @@ const Input = ({ value, onChange, className, type = 'text', ...props }: InputPro
         value={currentValue}
         onChange={(e) => updateValue(e.target.value)}
       />
-      <button
-        type='button'
-        className={styles.clearButton}
-        aria-label='입력 내용 지우기'
-        onClick={() => {
-          updateValue('');
-          inputRef.current?.focus();
-        }}
-      >
-        <X size={16} aria-hidden='true' />
-      </button>
+      {currentValue && (
+        <button
+          type='button'
+          className={styles.clearButton}
+          aria-label='입력 내용 지우기'
+          onClick={() => {
+            updateValue('');
+            inputRef.current?.focus();
+          }}
+        >
+          <X size={16} aria-hidden='true' />
+        </button>
+      )}
     </div>
   );
 };

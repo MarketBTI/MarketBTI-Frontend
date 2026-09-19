@@ -1,204 +1,115 @@
-/* Keep the existing reset: Preflight would change the vanilla-extract components. */
-@layer theme, base, components, utilities;
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/utilities.css' layer(utilities);
-@source "../../";
-
-/* These variables are owned by theme.css.ts, so only register their utility names.
-   reference prevents duplicate (and self-referencing) variables in the output CSS. */
 @theme {
-  --color-*: initial;
-}
-@theme reference {
-  --color-primary-100: var(--color-primary-100);
-  --color-primary-200: var(--color-primary-200);
-  --color-primary-300: var(--color-primary-300);
-  --color-primary-400: var(--color-primary-400);
-  --color-primary-500: var(--color-primary-500);
-  --color-primary-600: var(--color-primary-600);
-  --color-primary-700: var(--color-primary-700);
-  --color-primary-800: var(--color-primary-800);
-  --color-primary-900: var(--color-primary-900);
-  --color-semantic-100: var(--color-semantic-100);
-  --color-semantic-200: var(--color-semantic-200);
-  --color-semantic-300: var(--color-semantic-300);
-  --color-semantic-400: var(--color-semantic-400);
-  --color-semantic-500: var(--color-semantic-500);
-  --color-semantic-600: var(--color-semantic-600);
-  --color-semantic-700: var(--color-semantic-700);
-  --color-semantic-800: var(--color-semantic-800);
-  --color-semantic-900: var(--color-semantic-900);
-  --color-neutral-100: var(--color-neutral-100);
-  --color-neutral-200: var(--color-neutral-200);
-  --color-neutral-300: var(--color-neutral-300);
-  --color-neutral-400: var(--color-neutral-400);
-  --color-neutral-500: var(--color-neutral-500);
-  --color-neutral-600: var(--color-neutral-600);
-  --color-neutral-700: var(--color-neutral-700);
-  --color-neutral-800: var(--color-neutral-800);
-  --color-neutral-900: var(--color-neutral-900);
-  --color-black: var(--color-black);
-  --color-white: var(--color-white);
-  --radius-xs: var(--radius-xs);
-  --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-lg);
-  --radius-xl: var(--radius-xl);
-  --radius-2xl: var(--radius-2xl);
-  --radius-3xl: var(--radius-3xl);
-}
-@theme inline {
-  --font-sans: var(--font-family);
+  --color-black: #111111;
+  --color-white: #ffffff;
+
+  /* Primary */
+  --color-primary-100: #f5fcf9;
+  --color-primary-200: #e0f6ec;
+  --color-primary-300: #bce6d3;
+  --color-primary-400: #a2ddc4;
+  --color-primary-500: #8bd4b4;
+  --color-primary-600: #72c6a3;
+  --color-primary-700: #5db692;
+  --color-primary-800: #499f7e;
+  --color-primary-900: #388768;
+
+  /* Neutral */
+  --color-neutral-100: #f2f4f5;
+  --color-neutral-200: #e8eaec;
+  --color-neutral-300: #dde0e3;
+  --color-neutral-400: #cfd3d7;
+  --color-neutral-500: #c1c6cb;
+  --color-neutral-600: #aeb4ba;
+  --color-neutral-700: #949ba2;
+  --color-neutral-800: #747c84;
+  --color-neutral-900: #555e67;
+
+  /* Semantic */
+  --color-semantic-100: #ffeeee;
+  --color-semantic-200: #ffddde;
+  --color-semantic-300: #ffc5ca;
+  --color-semantic-400: #ff90a8;
+  --color-semantic-500: #ff7d88;
+  --color-semantic-600: #f56875;
+  --color-semantic-700: #e65360;
+  --color-semantic-800: #cc414d;
+  --color-semantic-900: #b33843;
 }
 
-@utility text-headline1 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-24);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+@layer utilities {
+  .typo-headline-1 {
+    @apply text-[24px] font-bold leading-[120%];
+  }
 
-@utility text-headline2 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-24);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-headline-2 {
+    @apply text-[24px] font-semibold leading-[120%];
+  }
 
-@utility text-headline3 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-24);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-headline-3 {
+    @apply text-[24px] font-medium leading-[120%];
+  }
 
-@utility text-headline4 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-24);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-headline-4 {
+    @apply text-[24px] font-normal leading-[120%];
+  }
 
-@utility text-title1 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-20);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-title-1 {
+    @apply text-[20px] font-bold leading-[120%];
+  }
 
-@utility text-title2 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-20);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-title-2 {
+    @apply text-[20px] font-semibold leading-[120%];
+  }
 
-@utility text-title3 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-20);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-title-3 {
+    @apply text-[20px] font-medium leading-[120%];
+  }
 
-@utility text-title4 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-20);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-title-4 {
+    @apply text-[20px] font-normal leading-[120%];
+  }
 
-@utility text-subtitle1 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-18);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-subtitle-1 {
+    @apply text-[18px] font-semibold leading-[120%];
+  }
 
-@utility text-subtitle2 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-18);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-subtitle-2 {
+    @apply text-[18px] font-medium leading-[120%];
+  }
 
-@utility text-subtitle3 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-18);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-subtitle-3 {
+    @apply text-[18px] font-normal leading-[120%];
+  }
 
-@utility text-body1 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-16);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-body-1 {
+    @apply text-[16px] font-semibold leading-[120%];
+  }
 
-@utility text-body2 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-16);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-body-2 {
+    @apply text-[16px] font-medium leading-[120%];
+  }
 
-@utility text-body3 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-16);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-body-3 {
+    @apply text-[16px] font-normal leading-[120%];
+  }
 
-@utility text-caption1 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-14);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-caption-1 {
+    @apply text-[14px] font-semibold leading-[120%];
+  }
 
-@utility text-caption2 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-14);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-caption-2 {
+    @apply text-[14px] font-medium leading-[120%];
+  }
 
-@utility text-caption3 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-14);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-caption-3 {
+    @apply text-[14px] font-normal leading-[120%];
+  }
 
-@utility text-small1 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-12);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
-}
+  .typo-small-1 {
+    @apply text-[12px] font-medium leading-[120%];
+  }
 
-@utility text-small2 {
-  font-family: var(--font-family);
-  font-size: var(--font-size-12);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-default);
-  letter-spacing: var(--letter-spacing-default);
+  .typo-small-2 {
+    @apply text-[12px] font-semibold leading-[120%];
+  }
 }

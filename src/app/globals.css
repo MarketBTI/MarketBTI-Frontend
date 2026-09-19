@@ -1,4 +1,7 @@
-@import './tailwind.css';
+@import 'tailwindcss';
+
+/* tokens */
+@import './styles/tailwind.css';
 
 html,
 body {
@@ -63,10 +66,10 @@ button:disabled {
 }
 
 .thin-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(179, 179, 179, 0.5);
+  background-color: rgb(196, 208, 255, 0.7);
   border-radius: 4px;
 }
 
 .thin-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(179, 179, 179, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
 }

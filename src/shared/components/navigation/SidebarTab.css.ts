@@ -8,6 +8,7 @@ export const sidebarTab = style([
     alignItems: 'center',
     gap: vars.space[3],
     width: '100%',
+    minWidth: '44px',
     height: '44px',
     padding: `0 ${vars.space[3]}`,
     borderRadius: vars.radius.lg,
@@ -44,4 +45,14 @@ export const icon = style({
   alignItems: 'center',
   justifyContent: 'center',
   flexShrink: 0,
+});
+
+export const label = style({
+  transition: 'opacity 300ms ease-in-out',
+  selectors: {
+    '&[data-collapsed]': { opacity: 0 },
+  },
+  '@media': {
+    '(prefers-reduced-motion: reduce)': { transition: 'none' },
+  },
 });

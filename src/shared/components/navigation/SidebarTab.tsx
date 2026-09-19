@@ -29,7 +29,13 @@ const SidebarTab = ({ label, icon, href, isCollapsed = false }: SidebarTabProps)
       <span className={styles.icon} aria-hidden='true'>
         {icon}
       </span>
-      {!isCollapsed && <span>{label}</span>}
+      <span
+        className={styles.label}
+        data-collapsed={isCollapsed || undefined}
+        aria-hidden={isCollapsed || undefined}
+      >
+        {label}
+      </span>
     </Link>
   );
 };
