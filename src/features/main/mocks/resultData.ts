@@ -1,3 +1,17 @@
+export const monthlyConsumption = [
+  { month: 1, day: 1, score: 95 },
+  { month: 1, day: 15, score: 112 },
+  { month: 2, day: 1, score: 135 },
+  { month: 2, day: 15, score: 118 },
+  { month: 3, day: 1, score: 148 },
+  { month: 3, day: 15, score: 178 },
+  { month: 4, day: 1, score: 170 },
+  { month: 4, day: 15, score: 210 },
+  { month: 5, day: 1, score: 155 },
+  { month: 5, day: 15, score: 182 },
+  { month: 6, day: 1, score: 220 },
+];
+
 export const typeMetrics = [
   {
     code: 'G',

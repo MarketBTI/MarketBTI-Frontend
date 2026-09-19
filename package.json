@@ -14,6 +14,7 @@
     "@vanilla-extract/css": "^1.21.2",
     "@vanilla-extract/recipes": "^0.5.7",
     "axios": "^1.20.0",
+    "chart.js": "^4.5.1",
     "clsx": "^2.1.1",
     "framer-motion": "^13.4.0",
     "jotai": "^3.0.0",
