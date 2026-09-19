@@ -1,8 +1,9 @@
+import SelectionSection from '@/features/main/components/step1/SelectionSection';
 import TitleHeader from '@/shared/layouts/TitleHeader';
 
 const page = () => {
   return (
-    <div className='min-h-[calc(100dvh-100px)] rounded-xl bg-white p-8 space-y-10'>
+    <div className='flex min-h-[calc(100dvh-100px)] flex-col gap-10 rounded-xl bg-white p-8'>
       <TitleHeader
         title={
           <>
@@ -12,6 +13,9 @@ const page = () => {
         }
         subtitle='선택한 조건으로 상권 유형을 진단합니다.'
       />
+      <div className='flex flex-1 justify-center'>
+        <SelectionSection />
+      </div>
     </div>
   );
 };
