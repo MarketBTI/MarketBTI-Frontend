@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { LodingBackgroundIcon, LodingMascotIcon } from '@/assets';
+import { useRouter } from 'next/navigation';
+import { CompleteCircleIcon, LodingBackgroundIcon, LodingMascotIcon } from '@/assets';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
-import { Circle, CircleCheck, LoaderCircle } from 'lucide-react';
+import { Circle, LoaderCircle } from 'lucide-react';
 import {
   selectedDistrictAtom,
   selectedIndustryAtom,
@@ -18,7 +19,9 @@ const analysisTasks = [
 ] as const;
 
 const DiagnosingSection = () => {
+  const router = useRouter();
   const shouldReduceMotion = useReducedMotion();
+
   const selectedRegion = useAtomValue(selectedRegionAtom);
   const selectedDistrict = useAtomValue(selectedDistrictAtom);
   const selectedIndustry = useAtomValue(selectedIndustryAtom);
@@ -34,6 +37,16 @@ const DiagnosingSection = () => {
 
     return () => window.clearTimeout(timeoutId);
   }, [progress]);
+
+  useEffect(() => {
+    if (progress < 100) return;
+
+    const timeoutId = window.setTimeout(() => {
+      router.replace('/?step=3');
+    }, 3000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [progress, router]);
 
   const selectedCondition = [selectedRegion, selectedDistrict, selectedIndustry]
     .filter((value): value is string => value !== null)
@@ -53,7 +66,7 @@ const DiagnosingSection = () => {
                 : {
                     x: [80, -80],
                     y: [45, -45],
-                    opacity: [0, 0, 0.4, 1, 1, 0.4, 0, 0],
+                    opacity: [0, 0.4, 1, 1, 0.4, 0],
                   }
             }
             transition={
@@ -66,7 +79,7 @@ const DiagnosingSection = () => {
                       duration: 4,
                       ease: 'easeInOut',
                       repeat: Infinity,
-                      times: [0, 0.0625, 0.22, 0.4, 0.65, 0.82, 0.9375, 1],
+                      times: [0, 0.16, 0.38, 0.68, 0.9, 1],
                     },
                   }
             }
@@ -101,9 +114,10 @@ const DiagnosingSection = () => {
             <span className='absolute top-0 right-1 typo-caption-3 text-neutral-900'>
               {progress}%
             </span>
-            <div className='h-2 overflow-hidden rounded-full bg-neutral-400'>
+            <div className='h-2 overflow-hidden rounded-full bg-neutral-500'>
               <motion.div
                 className='h-full rounded-full bg-primary-800'
+                initial={{ width: '0%' }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: shouldReduceMotion ? 0 : 0.15, ease: 'linear' }}
               />
@@ -111,14 +125,14 @@ const DiagnosingSection = () => {
           </div>
 
           <div className='mt-6 text-center'>
-            <h1 className='typo-headline-1 text-neutral-900'>상권의 소비 성격을 읽는 중입니다</h1>
+            <h1 className='typo-headline-1 text-black'>상권의 소비 성격을 읽는 중입니다</h1>
             <p className='mt-2 typo-caption-2 text-primary-900'>
               {selectedCondition || '선택한 조건을 확인하고 있습니다.'}
             </p>
           </div>
         </div>
 
-        <ol className='mt-14 flex flex-col gap-4'>
+        <ol className='mt-15 flex flex-col gap-4'>
           {analysisTasks.map((task, index) => {
             const isComplete = progress >= task.completeAt;
             const previousCompleteAt = index === 0 ? 0 : analysisTasks[index - 1].completeAt;
@@ -130,27 +144,29 @@ const DiagnosingSection = () => {
                 className='flex min-h-13 items-center gap-2 rounded-xl bg-neutral-100 px-4'
               >
                 {isComplete ? (
-                  <CircleCheck size={18} className='shrink-0 text-primary-700' aria-hidden='true' />
+                  <CompleteCircleIcon
+                    size={18}
+                    className='shrink-0 text-primary-700'
+                    aria-hidden='true'
+                  />
                 ) : isActive ? (
                   <LoaderCircle
-                    size={18}
+                    size={17}
                     className='shrink-0 animate-spin text-primary-700 motion-reduce:animate-none'
                     aria-hidden='true'
                   />
                 ) : (
-                  <Circle size={18} className='shrink-0 text-neutral-500' aria-hidden='true' />
+                  <Circle size={17} className='shrink-0 text-neutral-600' aria-hidden='true' />
                 )}
 
-                <span className={isActive || isComplete ? 'text-neutral-900' : 'text-neutral-600'}>
+                <span
+                  className={isActive || isComplete ? 'typo-body-2 text-black' : 'text-neutral-600'}
+                >
                   {task.label}
                 </span>
                 <span
                   className={
-                    isComplete
-                      ? 'ml-auto text-primary-800'
-                      : isActive
-                        ? 'ml-auto text-neutral-700'
-                        : 'ml-auto text-neutral-600'
+                    isComplete ? 'ml-auto text-primary-800 typo-body-2' : 'ml-auto text-neutral-600'
                   }
                 >
                   {isComplete ? '완료' : isActive ? '분석중' : '대기'}
@@ -160,7 +176,7 @@ const DiagnosingSection = () => {
           })}
         </ol>
 
-        <p className='mt-14 text-center typo-body-3 text-neutral-800'>
+        <p className='mt-15 animate-pulse text-center typo-body-3 text-neutral-800 motion-reduce:animate-none'>
           잠시만 기다려주세요. 정확한 분석을 위해 데이터를 처리하고 있습니다.
         </p>
       </div>
