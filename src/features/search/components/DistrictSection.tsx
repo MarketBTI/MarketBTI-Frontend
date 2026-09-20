@@ -2,17 +2,17 @@
 
 import { useAtomValue } from 'jotai';
 import { SearchBackgroundIcon } from '@/assets';
-import { debouncedSearchValueAtom } from '@/features/search/atoms/searchAtoms';
+import { submittedSearchValueAtom } from '@/features/search/atoms/searchAtoms';
 import { BuildingComplex, MapPin } from 'lucide-react';
 import Button from '@/shared/components/button/Button';
 import KakaoMap from './KakaoMap';
 
 const DistrictSection = () => {
-  const setDebouncedSearchValue = useAtomValue(debouncedSearchValueAtom);
+  const submittedSearchValue = useAtomValue(submittedSearchValueAtom);
 
   return (
     <section className='mx-auto flex w-full max-w-264 flex-1 flex-col'>
-      {!setDebouncedSearchValue.trim() ? (
+      {!submittedSearchValue ? (
         <div className='flex flex-col flex-1 items-center justify-center gap-8'>
           <SearchBackgroundIcon aria-hidden='true' />
           <p className='text-neutral-900 typo-title-2'>검색할 조건을 입력해주세요</p>
