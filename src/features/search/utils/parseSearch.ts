@@ -7,7 +7,8 @@ export interface SearchConditions {
 }
 
 export type SearchResult =
-  { kind: 'empty' | 'industry-only' | 'invalid' } | { kind: 'valid'; conditions: SearchConditions };
+  | { kind: 'empty' | 'industry-only' | 'invalid' | 'ambiguous' }
+  | { kind: 'valid'; conditions: SearchConditions };
 
 const normalize = (value: string) => value.replace(/\s+/g, '');
 
@@ -31,7 +32,8 @@ export const parseSearch = (value: string): SearchResult => {
   const matches = Object.entries(districtsByRegion).filter(([, districts]) =>
     districts.some((district) => normalize(district) === remaining),
   );
-  if (matches.length !== 1) return { kind: 'invalid' };
+  if (matches.length > 1) return { kind: 'ambiguous' };
+  if (matches.length === 0) return { kind: 'invalid' };
   const [matchedRegion, districts] = matches[0];
   return {
     kind: 'valid',
