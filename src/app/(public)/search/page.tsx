@@ -1,3 +1,4 @@
+import DistrictSection from '@/features/search/components/DistrictSection';
 import SearchSection from '@/features/search/components/SearchSection';
 import TitleHeader from '@/shared/layouts/TitleHeader';
 
@@ -15,6 +16,7 @@ const RistSearchPage = () => {
       />
 
       <SearchSection />
+      <DistrictSection />
     </div>
   );
 };

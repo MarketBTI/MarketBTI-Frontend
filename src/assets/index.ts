@@ -7,3 +7,5 @@ export { default as VillageIcon } from './icons/Village.svg';
 export { default as LodingMascotIcon } from './icons/LodingMascot.svg';
 export { default as LodingBackgroundIcon } from './icons/LodingBackground.svg';
 export { default as CompleteCircleIcon } from './icons/CompleteCircle.svg';
+export { default as SearchBackgroundIcon } from './icons/SearchBackground.svg';
+export { default as SearchErrorBackgroundIcon } from './icons/SearchErrorBackground.svg';
