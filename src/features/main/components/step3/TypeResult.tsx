@@ -1,5 +1,5 @@
-import { GCFVIcon } from '@/assets';
 import { BookAlert } from 'lucide-react';
+import Image from 'next/image';
 import { typeMetrics } from '../../mocks/resultData';
 
 const TypeResult = () => {
@@ -7,7 +7,13 @@ const TypeResult = () => {
     <section className='rounded-xl border border-neutral-400 bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] p-4 space-y-3'>
       <div className='flex items-stretch gap-6 py-3 pl-7'>
         <article className='inline-flex shrink-0 flex-col items-center'>
-          <GCFVIcon width={160} height={160} />
+          <Image
+            src='/characters/GCFV.svg'
+            alt='GCFV 유형 캐릭터'
+            width={160}
+            height={160}
+            unoptimized
+          />
           <h1 className='text-[40px] font-bold text-black'>GCFV</h1>
           <p className='typo-body-1 text-primary-900'>(인플루언서 원툴형)</p>
         </article>

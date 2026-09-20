@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import clsx from 'clsx';
+import Image from 'next/image';
 import Chip from '@/shared/components/chip/Chip';
 import TitleHeader from '@/shared/layouts/TitleHeader';
 import { marketTypes } from '../constants/typeGrid';
@@ -21,7 +22,7 @@ const TypeGridSection = () => {
       />
 
       <div className='grid grid-cols-4 items-center gap-4 max-w-264 w-full mx-auto'>
-        {marketTypes.map(({ code, Icon }) => (
+        {marketTypes.map(({ code, imageSrc }) => (
           <button
             key={code}
             type='button'
@@ -47,7 +48,15 @@ const TypeGridSection = () => {
               <span className='w-full flex justify-end'>
                 <Chip label={code} />
               </span>
-              <Icon width={200} height={200} className='max-w-full' aria-hidden='true' />
+              <Image
+                src={imageSrc}
+                alt=''
+                width={200}
+                height={200}
+                className='h-auto max-w-full'
+                loading={code === 'GBFS' ? 'eager' : 'lazy'}
+                unoptimized
+              />
             </span>
           </button>
         ))}
