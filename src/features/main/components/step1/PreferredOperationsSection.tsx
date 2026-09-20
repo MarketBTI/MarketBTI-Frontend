@@ -12,6 +12,14 @@ import {
 import Button from '@/shared/components/button/Button';
 import PreferenceCard from './PreferenceCard';
 
+const priorityLabels = [
+  '안정형 매우 우선',
+  '안정형 우선',
+  '안정형·성장형 균형',
+  '성장형 우선',
+  '성장형 매우 우선',
+] as const;
+
 const PreferredOperationsSection = () => {
   const [operatingPriority, setOperatingPriority] = useAtom(operatingPriorityAtom);
   const [targetCustomerAge, setTargetCustomerAge] = useAtom(targetCustomerAgeAtom);
@@ -23,7 +31,14 @@ const PreferredOperationsSection = () => {
 
       <PreferenceCard step={1} title='운영 우선 순위'>
         <div className='flex items-center gap-4 px-4'>
-          <span className='shrink-0 rounded-lg bg-neutral-100 px-3 py-4 typo-body-2 text-neutral-900'>
+          <span
+            className={clsx(
+              'shrink-0 rounded-lg px-3 py-4 typo-body-2',
+              operatingPriority < 3
+                ? 'bg-primary-200 text-primary-900'
+                : 'bg-neutral-100 text-neutral-900',
+            )}
+          >
             안정형
           </span>
           <div
@@ -76,10 +91,20 @@ const PreferredOperationsSection = () => {
               );
             })}
           </div>
-          <span className='shrink-0 rounded-lg bg-neutral-100 px-3 py-4 typo-body-2 text-neutral-900'>
+          <span
+            className={clsx(
+              'shrink-0 rounded-lg px-3 py-4 typo-body-2',
+              operatingPriority > 3
+                ? 'bg-primary-200 text-primary-900'
+                : 'bg-neutral-100 text-neutral-900',
+            )}
+          >
             성장형
           </span>
         </div>
+        <p aria-live='polite' className='text-center typo-caption-1 text-primary-900'>
+          {priorityLabels[operatingPriority - 1]}
+        </p>
       </PreferenceCard>
 
       <PreferenceCard
@@ -103,8 +128,8 @@ const PreferredOperationsSection = () => {
 
       <PreferenceCard
         step={3}
-        title='목표 월 매출'
-        description='매장의 월 평균 목표 매출을 선택해 주세요.'
+        title='목표 월평균 매출'
+        description='매장의 월평균 목표 매출을 선택해 주세요.'
       >
         <div className='grid grid-cols-3 gap-3'>
           {monthlySalesOptions.map((sales) => (
