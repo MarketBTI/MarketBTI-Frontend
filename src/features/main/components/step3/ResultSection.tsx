@@ -7,12 +7,12 @@ import RiskSignal from './RiskSignal';
 import Button from '@/shared/components/button/Button';
 import Toast from '@/shared/components/toast/Toast';
 import { Download, RotateCw } from 'lucide-react';
-import { useRestartDiagnosis, useResultPdfDownload } from '@/features/main/hooks';
+import { useRestartDiagnosis, useResultImageDownload } from '@/features/main/hooks';
 
 const ResultSection = () => {
   const handleRestart = useRestartDiagnosis();
-  const { resultRef, isDownloading, downloadStatus, closeDownloadToast, handleDownloadPdf } =
-    useResultPdfDownload();
+  const { resultRef, isDownloading, downloadStatus, closeDownloadToast, handleDownloadImage } =
+    useResultImageDownload();
 
   return (
     <section className='w-207'>
@@ -35,10 +35,10 @@ const ResultSection = () => {
           disabled={isDownloading}
         />
         <Button
-          label={isDownloading ? 'PDF 생성 중...' : 'PDF로 다운받기'}
+          label={isDownloading ? '이미지 생성 중...' : '이미지로 다운받기'}
           icon={<Download />}
           size='lg'
-          onClick={handleDownloadPdf}
+          onClick={handleDownloadImage}
           disabled={isDownloading}
         />
       </div>
@@ -47,8 +47,8 @@ const ResultSection = () => {
           variant={downloadStatus}
           message={
             downloadStatus === 'success'
-              ? 'PDF가 다운로드되었습니다.'
-              : 'PDF 생성에 실패했습니다. 다시 시도해 주세요.'
+              ? '이미지가 다운로드되었습니다.'
+              : '이미지 생성에 실패했습니다. 다시 시도해 주세요.'
           }
           onClose={closeDownloadToast}
         />

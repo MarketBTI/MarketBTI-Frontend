@@ -1,2 +1,2 @@
 export { default as useRestartDiagnosis } from './useRestartDiagnosis';
-export { default as useResultPdfDownload } from './useResultPdfDownload';
+export { default as useResultImageDownload } from './useResultImageDownload';
