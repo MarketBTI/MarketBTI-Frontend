@@ -2,6 +2,7 @@
 
 import { useAtom } from 'jotai';
 import SelectionGroup from './SelectionGroup';
+import PreferredOperationsSection from './PreferredOperationsSection';
 import {
   selectedDistrictAtom,
   selectedIndustryAtom,
@@ -73,6 +74,8 @@ const SelectionSection = () => {
           />
         )}
       </div>
+
+      {<PreferredOperationsSection />}
       <div className='mt-10 flex justify-center'>
         <Button
           label='위험 진단 시작하기'

@@ -16,10 +16,7 @@ const SelectionGroup = ({ step, title, options, selected, onSelect }: SelectionG
   return (
     <div
       aria-labelledby={titleId}
-      className={clsx(
-        'flex flex-col gap-3 rounded-xl border border-neutral-400 bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] px-5 py-6',
-        step === 1 ? 'h-60' : 'h-49',
-      )}
+      className='flex flex-col gap-3 rounded-xl border border-neutral-400 bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] px-5 py-6 h-49'
     >
       <article className='flex shrink-0 items-center gap-2'>
         <span
