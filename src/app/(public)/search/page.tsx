@@ -12,7 +12,7 @@ const RistSearchPage = () => {
             <span className='text-primary-900'> 업종</span>을 검색해보세요.
           </>
         }
-        subtitle='지역과 업종 기준으로 최근 6개월 현황을 확인할 수 있어요.'
+        subtitle='지역과 업종 기준으로 최근 6개월 간 상권의 폐업률 현황을 확인할 수 있어요.'
       />
 
       <SearchSection />

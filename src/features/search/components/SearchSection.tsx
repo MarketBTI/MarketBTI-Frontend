@@ -1,10 +1,7 @@
 'use client';
 
 import { useAtom, useSetAtom } from 'jotai';
-import {
-  searchValueAtom,
-  submittedSearchValueAtom,
-} from '@/features/search/atoms/searchAtoms';
+import { searchValueAtom, submittedSearchValueAtom } from '@/features/search/atoms/searchAtoms';
 import Button from '@/shared/components/button/Button';
 import Input from '@/shared/components/input/Input';
 
@@ -23,7 +20,7 @@ const SearchSection = () => {
       <Input
         value={searchValue}
         onChange={setSearchValue}
-        placeholder='시·구·군 및 업종을 입력해주세요.'
+        placeholder='시·구·군 및 업종명을 정확히 입력해주세요.'
       />
       <Button type='submit' label='검색' className='w-20' />
     </form>
