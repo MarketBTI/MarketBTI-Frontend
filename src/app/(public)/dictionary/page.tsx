@@ -3,7 +3,7 @@ import TypeGridSection from '@/features/dictionary/components/TypeGridSection';
 
 const DictionaryPage = () => {
   return (
-    <div className='space-y-5'>
+    <div className='space-y-5 '>
       <TypeAxesSection />
       <TypeGridSection />
     </div>

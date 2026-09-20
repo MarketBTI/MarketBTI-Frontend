@@ -10,7 +10,7 @@ export const wrapper = style({
   height: '44px',
   padding: `0 ${vars.space[3]}`,
   border: `1px solid ${vars.color.neutral[400]}`,
-  borderRadius: vars.radius.xl,
+  borderRadius: '12px',
   backgroundColor: vars.color.white,
   selectors: {
     '&:focus-within': { borderColor: vars.color.primary[500] },
