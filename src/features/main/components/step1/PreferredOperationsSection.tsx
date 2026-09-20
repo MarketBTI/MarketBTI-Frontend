@@ -27,7 +27,7 @@ const PreferredOperationsSection = () => {
 
   return (
     <section className='mt-5 flex flex-col gap-4 rounded-xl border border-primary-200 bg-primary-100 px-5 py-6 shadow-[0_4px_12px_0_rgba(0,0,0,0.15)]'>
-      <h2 className='typo-title-2 text-neutral-900'>선호 운영 기준</h2>
+      <h2 className='typo-title-2 text-black'>선호 운영 기준</h2>
 
       <PreferenceCard step={1} title='운영 우선 순위'>
         <div className='flex items-center gap-4 px-4'>

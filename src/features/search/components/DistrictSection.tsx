@@ -12,8 +12,9 @@ const DistrictSection = () => {
   return (
     <section className='mx-auto flex w-full max-w-264 flex-1 flex-col'>
       {!setDebouncedSearchValue.trim() ? (
-        <div className='flex flex-1 items-center justify-center'>
+        <div className='flex flex-col flex-1 items-center justify-center gap-8'>
           <SearchBackgroundIcon aria-hidden='true' />
+          <p className='text-neutral-900 typo-title-2'>검색할 조건을 입력해주세요</p>
         </div>
       ) : (
         <section className='flex flex-col gap-4 bg-white border border-neutral-400 rounded-xl w-85 p-4'>
@@ -27,24 +28,74 @@ const DistrictSection = () => {
 
           <div className='bg-white border border-neutral-400 rounded-xl p-4 flex flex-col gap-3'>
             <p className='typo-body-1'>관련 지역</p>
-            <Button label='강남구' icon={<MapPin />} variant='outline' className='justify-start!' />
-            <Button label='강남구' icon={<MapPin />} variant='outline' className='justify-start!' />
+            <div className='thin-scrollbar flex max-h-54 flex-col gap-3 overflow-y-auto pr-2 pb-1'>
+              <Button
+                label='강남구'
+                icon={<MapPin />}
+                variant='outline'
+                className='shrink-0 justify-start!'
+              />
+              <Button
+                label='강동구'
+                icon={<MapPin />}
+                variant='outline'
+                className='shrink-0 justify-start!'
+              />
+              <Button
+                label='강북구'
+                icon={<MapPin />}
+                variant='outline'
+                className='shrink-0 justify-start!'
+              />
+              <Button
+                label='강서구'
+                icon={<MapPin />}
+                variant='outline'
+                className='shrink-0 justify-start!'
+              />
+              <Button
+                label='관악구'
+                icon={<MapPin />}
+                variant='outline'
+                className='shrink-0 justify-start!'
+              />
+            </div>
           </div>
 
           <div className='bg-white border border-neutral-400 rounded-xl p-4 flex flex-col gap-3'>
             <p className='typo-body-1'>관련 업종</p>
-            <Button
-              label='대형 할인점'
-              icon={<BuildingComplex />}
-              variant='outline'
-              className='justify-start!'
-            />
-            <Button
-              label='한식'
-              icon={<BuildingComplex />}
-              variant='outline'
-              className='justify-start!'
-            />
+            <div className='thin-scrollbar flex max-h-54 flex-col gap-3 overflow-y-auto pr-2 pb-1'>
+              <Button
+                label='대형 할인점'
+                icon={<BuildingComplex />}
+                variant='outline'
+                className='shrink-0 justify-start!'
+              />
+              <Button
+                label='한식'
+                icon={<BuildingComplex />}
+                variant='outline'
+                className='shrink-0 justify-start!'
+              />
+              <Button
+                label='한식'
+                icon={<BuildingComplex />}
+                variant='outline'
+                className='shrink-0 justify-start!'
+              />
+              <Button
+                label='한식'
+                icon={<BuildingComplex />}
+                variant='outline'
+                className='shrink-0 justify-start!'
+              />
+              <Button
+                label='한식'
+                icon={<BuildingComplex />}
+                variant='outline'
+                className='shrink-0 justify-start!'
+              />
+            </div>
           </div>
 
           <div className='bg-white border border-neutral-400 rounded-xl p-4 flex flex-col gap-3'>
