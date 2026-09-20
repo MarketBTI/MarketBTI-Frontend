@@ -1,11 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import proj4 from 'proj4';
+import { districtsByRegion } from '@/features/main/mocks/selectionOptions';
 
 const SGIS_AUTH_URL = 'https://sgisapi.kostat.go.kr/OpenAPI3/auth/authentication.json';
 const SGIS_BOUNDARY_URL = 'https://sgisapi.kostat.go.kr/OpenAPI3/boundary/hadmarea.geojson';
 const EPSG_5179 =
   '+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs';
 const WGS84 = 'EPSG:4326';
+const SGIS_ADDRESS_URL = 'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json';
+const regionAliases: Record<string, string> = {
+  강원특별자치도: '강원도',
+  전북특별자치도: '전라북도',
+};
+const boundaryCache = new Map<string, { expiresAt: number; data: SgisBoundaryResponse }>();
+let regionCache: { expiresAt: number; data: Array<{ cd: string; addr_name: string }> } | null =
+  null;
 
 type SgisPosition = [number, number];
 type SgisPolygon = SgisPosition[][];
@@ -85,42 +94,101 @@ const convertPosition = ([x, y]: SgisPosition) => {
 };
 
 export const GET = async (request: NextRequest) => {
-  const admCd = request.nextUrl.searchParams.get('admCd') ?? '11230';
+  const region = request.nextUrl.searchParams.get('region');
+  const district = request.nextUrl.searchParams.get('district') ?? '';
+  let admCd = request.nextUrl.searchParams.get('admCd') ?? '';
   const year = request.nextUrl.searchParams.get('year') ?? '2025';
 
-  if (!/^\d{2,8}$/.test(admCd) || !/^\d{4}$/.test(year)) {
-    return NextResponse.json({ message: '행정구역 코드 또는 기준연도가 올바르지 않습니다.' }, { status: 400 });
+  if (
+    !/^\d{4}$/.test(year) ||
+    (region
+      ? !Object.hasOwn(districtsByRegion, region) ||
+        (district !== '' && !districtsByRegion[region].includes(district))
+      : !/^\d{2,8}$/.test(admCd))
+  ) {
+    return NextResponse.json(
+      { message: '행정구역 코드 또는 기준연도가 올바르지 않습니다.' },
+      { status: 400 },
+    );
   }
 
   try {
     const accessToken = await getSgisAccessToken();
+    if (region) {
+      if (!regionCache || regionCache.expiresAt <= Date.now()) {
+        const addressUrl = new URL(SGIS_ADDRESS_URL);
+        addressUrl.searchParams.set('accessToken', accessToken);
+        addressUrl.searchParams.set('pg_yn', '0');
+        const response = await fetch(addressUrl, { cache: 'no-store' });
+        if (!response.ok) throw new Error('행정구역 목록을 불러오지 못했습니다.');
+        const addresses = (await response.json()) as {
+          errCd: number;
+          result?: Array<{ cd: string; addr_name: string }>;
+        };
+        if (addresses.errCd !== 0 || !addresses.result)
+          throw new Error('행정구역 목록을 불러오지 못했습니다.');
+        regionCache = { data: addresses.result, expiresAt: Date.now() + 86_400_000 };
+      }
+      const matched = regionCache.data.find(
+        (item) => item.addr_name === region || item.addr_name === regionAliases[region],
+      );
+      if (!matched)
+        return NextResponse.json(
+          { message: '해당 지역의 경계 정보를 제공하지 않습니다.' },
+          { status: 404 },
+        );
+      admCd = matched.cd;
+    }
+    const lowSearch = region && district && district !== '세종시 전체' ? '1' : '0';
     const url = new URL(SGIS_BOUNDARY_URL);
     url.searchParams.set('accessToken', accessToken);
     url.searchParams.set('year', year);
     url.searchParams.set('adm_cd', admCd);
-    url.searchParams.set('low_search', '0');
+    url.searchParams.set('low_search', lowSearch);
 
-    const response = await fetch(url, { cache: 'no-store' });
-    if (!response.ok) throw new Error('SGIS 경계 요청에 실패했습니다.');
-
-    const data = (await response.json()) as SgisBoundaryResponse;
-    const feature = data.features?.[0];
-
-    if (data.errCd !== 0 || !feature) {
-      throw new Error(data.errMsg || '행정구역 경계를 찾지 못했습니다.');
+    const cacheKey = `${year}:${admCd}:${lowSearch}`;
+    const cached = boundaryCache.get(cacheKey);
+    let data = cached && cached.expiresAt > Date.now() ? cached.data : null;
+    if (!data) {
+      const response = await fetch(url, { cache: 'no-store' });
+      if (!response.ok) throw new Error('SGIS 경계 요청에 실패했습니다.');
+      data = (await response.json()) as SgisBoundaryResponse;
+      if (data.errCd !== 0 || !data.features?.length)
+        throw new Error(data.errMsg || '행정구역 경계를 찾지 못했습니다.');
+      if (boundaryCache.size >= 40) boundaryCache.delete(boundaryCache.keys().next().value!);
+      boundaryCache.set(cacheKey, { data, expiresAt: Date.now() + 86_400_000 });
     }
 
-    const sourcePolygons: SgisMultiPolygon =
+    // Match within the selected province, and include all constituent wards of a city.
+    const features =
+      data.features?.filter((feature) => {
+        if (!region || !district || district === '세종시 전체') return true;
+        const name = feature.properties.adm_nm
+          .replace(new RegExp(`^(${region}|${regionAliases[region] ?? region})\\s*`), '')
+          .trim();
+        return name === district || name.startsWith(`${district} `);
+      }) ?? [];
+    if (!features.length)
+      return NextResponse.json(
+        {
+          message: `${year}년 기준 ${region} ${district}의 경계 정보를 제공하지 않습니다.`,
+        },
+        { status: 404 },
+      );
+    const sourcePolygons: SgisMultiPolygon = features.flatMap((feature) =>
       feature.geometry.type === 'Polygon'
         ? [feature.geometry.coordinates]
-        : feature.geometry.coordinates;
-    const polygons = sourcePolygons.map(
-      (polygon) => polygon.map((ring) => ring.map(convertPosition)),
+        : feature.geometry.coordinates,
+    );
+    const polygons = sourcePolygons.map((polygon) =>
+      polygon.map((ring) => ring.map(convertPosition)),
     );
 
     return NextResponse.json({
-      admCd: feature.properties.adm_cd,
-      districtName: feature.properties.adm_nm,
+      admCd: features.map((feature) => feature.properties.adm_cd).join(','),
+      districtName: region
+        ? [region, district].filter(Boolean).join(' ')
+        : features[0].properties.adm_nm,
       polygons,
     });
   } catch (error) {

@@ -29,14 +29,16 @@ const KakaoMap = ({ address = '서울특별시 강남구', showBoundary = false 
 
   useEffect(() => {
     const controller = new AbortController();
-    // Boundary codes verified for the initial mock districts.
-    const admCd =
-      address === '서울특별시 강남구' ? '11230' : address === '서울특별시 구로구' ? '11170' : null;
-    if (!admCd) return () => controller.abort();
+    const [region, ...districtParts] = address.split(' ');
+    const params = new URLSearchParams({
+      region,
+      district: districtParts.join(' '),
+      year: '2025',
+    });
 
     const loadBoundary = async () => {
       try {
-        const response = await fetch(`/api/district-boundary?admCd=${admCd}&year=2025`, {
+        const response = await fetch(`/api/district-boundary?${params}`, {
           signal: controller.signal,
         });
         const data = (await response.json()) as DistrictBoundaryResponse & { message?: string };
