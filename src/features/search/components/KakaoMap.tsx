@@ -15,7 +15,7 @@ interface DistrictBoundaryResponse {
 
 const KakaoMap = () => {
   const [loading, error] = useKakaoLoader({
-    appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_KEY!,
+    appkey: process.env.NEXT_KAKAO_MAP_KEY!,
     libraries: ['services'],
   });
   const [map, setMap] = useState<kakao.maps.Map | null>(null);

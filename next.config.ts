@@ -11,6 +11,9 @@ const withVanillaExtract = createVanillaExtractPlugin({
 const nextConfig = {
   /* config options here */
   reactCompiler: true,
+  env: {
+    NEXT_KAKAO_MAP_KEY: process.env.NEXT_KAKAO_MAP_KEY,
+  },
   turbopack: {
     rules: {
       '*.svg': {
