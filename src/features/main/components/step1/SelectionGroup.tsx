@@ -41,7 +41,7 @@ const SelectionGroup = ({
       <article
         className={clsx(
           'grid min-h-0 flex-1 gap-3 overflow-y-auto thin-scrollbar py-1 pr-2',
-          step === 1 ? 'grid-cols-5' : 'grid-cols-6',
+          step === 2 ? 'grid-cols-6' : 'grid-cols-5',
         )}
         aria-live='polite'
       >

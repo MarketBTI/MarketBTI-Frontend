@@ -8,14 +8,13 @@ import {
   selectedIndustryAtom,
   selectedRegionAtom,
 } from '@/features/main/atoms/selectionAtoms';
-import { industryOptions } from '@/features/main/mocks/selectionOptions';
 import { VillageIcon } from '@/assets';
 import Button from '@/shared/components/button/Button';
 import ErrorState from '@/shared/components/feedback/ErrorState';
 import LoadingSpinner from '@/shared/components/feedback/LoadingSpinner';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { getFindRegions } from '@/features/main/api/diagnosis';
+import { getFindIndustries, getFindRegions } from '@/features/main/api/diagnosis';
 
 const SelectionSection = () => {
   const router = useRouter();
@@ -55,6 +54,28 @@ const SelectionSection = () => {
     districtsResponse?.result.flatMap((region) =>
       'sigungu_name' in region ? [region.sigungu_name] : [],
     ) ?? [];
+
+  const selectedRegionCode = districtsResponse?.result.flatMap((region) =>
+    'sigungu_name' in region && region.sigungu_name === selectedDistrict
+      ? [region.region_code]
+      : [],
+  )[0];
+
+  const {
+    data: industriesResponse,
+    isPending: isIndustriesPending,
+    isError: isIndustriesError,
+    refetch: refetchIndustries,
+  } = useQuery({
+    queryKey: ['industries', selectedRegionCode],
+    queryFn: () => getFindIndustries(selectedRegionCode ?? ''),
+    enabled: Boolean(selectedRegionCode),
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
+  });
+
+  const industryOptions =
+    industriesResponse?.result.map(({ industry_display_name }) => industry_display_name) ?? [];
 
   const selectRegion = (region: string) => {
     if (region === selectedRegion) return;
@@ -123,6 +144,16 @@ const SelectionSection = () => {
             options={industryOptions}
             selected={selectedIndustry}
             onSelect={setSelectedIndustry}
+            status={
+              isIndustriesPending ? (
+                <LoadingSpinner label='업종 목록을 불러오는 중입니다.' />
+              ) : isIndustriesError ? (
+                <ErrorState
+                  message='업종 목록을 불러오지 못했습니다.'
+                  onRetry={() => void refetchIndustries()}
+                />
+              ) : undefined
+            }
           />
         )}
       </div>
