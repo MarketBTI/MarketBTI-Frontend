@@ -35,3 +35,8 @@ export type ResponseDiagnosis = CommonResponse<{
   pollingIntervalMs: number;
   status: string;
 }>;
+
+export type ResponseDiagnosisStatus = CommonResponse<{
+  analyzeId: string;
+  status: string;
+}>;

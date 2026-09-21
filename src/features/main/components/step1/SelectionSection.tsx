@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import SelectionGroup from './SelectionGroup';
 import PreferredOperationsSection from './PreferredOperationsSection';
 import {
@@ -13,6 +13,7 @@ import {
   targetMonthlySalesAtom,
 } from '@/features/main/atoms/selectionAtoms';
 import { postDiagnoses } from '@/features/main/api/diagnosis';
+import { analyzeIdAtom } from '@/features/main/atoms/analysisAtoms';
 import { VillageIcon } from '@/assets';
 import Button from '@/shared/components/button/Button';
 import ErrorState from '@/shared/components/feedback/ErrorState';
@@ -30,6 +31,7 @@ import {
 
 const SelectionSection = () => {
   const router = useRouter();
+  const setAnalyzeId = useSetAtom(analyzeIdAtom);
 
   const [selectedRegion, setSelectedRegion] = useAtom(selectedRegionAtom);
   const [selectedDistrict, setSelectedDistrict] = useAtom(selectedDistrictAtom);
@@ -75,7 +77,10 @@ const SelectionSection = () => {
 
   const { mutate: diagnose, isPending: isDiagnosisPending } = useMutation({
     mutationFn: postDiagnoses,
-    onSuccess: () => router.push('/?step=2'),
+    onSuccess: ({ result }) => {
+      setAnalyzeId(result.analyzeId);
+      router.push('/?step=2');
+    },
   });
 
   const startDiagnosis = () => {

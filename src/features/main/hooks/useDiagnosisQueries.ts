@@ -1,7 +1,11 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { getFindIndustries, getFindRegions } from '@/features/main/api/diagnosis';
+import {
+  getDiagnosesStatus,
+  getFindIndustries,
+  getFindRegions,
+} from '@/features/main/api/diagnosis';
 import type { SidoRegion, SigunguRegion } from '@/features/main/types/diagnosis';
 
 const STALE_TIME = 1000 * 60 * 5;
@@ -44,4 +48,13 @@ export const useIndustriesQuery = (regionCode?: string) =>
     enabled: Boolean(regionCode),
     staleTime: STALE_TIME,
     gcTime: GC_TIME,
+  });
+
+export const useDiagnosisStatusQuery = (analyzeId: string | null) =>
+  useQuery({
+    queryKey: ['diagnoses', analyzeId, 'status'],
+    queryFn: () => getDiagnosesStatus(analyzeId ?? ''),
+    enabled: Boolean(analyzeId),
+    refetchInterval: ({ state }) =>
+      state.data?.result.status === 'Pending' ? 1000 : false,
   });

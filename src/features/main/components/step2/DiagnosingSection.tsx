@@ -6,12 +6,13 @@ import { CompleteCircleIcon, LodingBackgroundIcon, LodingMascotIcon } from '@/as
 import { motion, useReducedMotion } from 'framer-motion';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { Circle, LoaderCircle } from 'lucide-react';
-import { analysisCompletedToastAtom } from '@/features/main/atoms/analysisAtoms';
+import { analyzeIdAtom, analysisCompletedToastAtom } from '@/features/main/atoms/analysisAtoms';
 import {
   selectedDistrictAtom,
   selectedIndustryAtom,
   selectedRegionAtom,
 } from '@/features/main/atoms/selectionAtoms';
+import { useDiagnosisStatusQuery } from '@/features/main/hooks';
 
 const analysisTasks = [
   { label: '소비금액·결제건수 추세 분석', completeAt: 34 },
@@ -27,11 +28,14 @@ const DiagnosingSection = () => {
   const selectedRegion = useAtomValue(selectedRegionAtom);
   const selectedDistrict = useAtomValue(selectedDistrictAtom);
   const selectedIndustry = useAtomValue(selectedIndustryAtom);
+  const analyzeId = useAtomValue(analyzeIdAtom);
+
+  const { data: diagnosisStatus } = useDiagnosisStatusQuery(analyzeId);
 
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    if (progress >= 100) return;
+    if (progress >= 99) return;
 
     const timeoutId = window.setTimeout(() => {
       setProgress((currentProgress) => currentProgress + 1);
@@ -41,15 +45,11 @@ const DiagnosingSection = () => {
   }, [progress]);
 
   useEffect(() => {
-    if (progress < 100) return;
+    if (diagnosisStatus?.result.status !== 'Success') return;
 
-    const timeoutId = window.setTimeout(() => {
-      setAnalysisCompletedToast(true);
-      router.replace('/?step=3');
-    }, 3000);
-
-    return () => window.clearTimeout(timeoutId);
-  }, [progress, router, setAnalysisCompletedToast]);
+    setAnalysisCompletedToast(true);
+    router.replace('/?step=3');
+  }, [diagnosisStatus, router, setAnalysisCompletedToast]);
 
   const selectedCondition = [selectedRegion, selectedDistrict, selectedIndustry]
     .filter((value): value is string => value !== null)

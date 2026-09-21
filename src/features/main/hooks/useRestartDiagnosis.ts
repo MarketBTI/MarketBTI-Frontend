@@ -10,7 +10,7 @@ import {
   targetCustomerAgeAtom,
   targetMonthlySalesAtom,
 } from '@/features/main/atoms/selectionAtoms';
-import { analysisCompletedToastAtom } from '@/features/main/atoms/analysisAtoms';
+import { analyzeIdAtom, analysisCompletedToastAtom } from '@/features/main/atoms/analysisAtoms';
 
 const useRestartDiagnosis = () => {
   const router = useRouter();
@@ -20,6 +20,7 @@ const useRestartDiagnosis = () => {
   const resetOperatingPriority = useResetAtom(operatingPriorityAtom);
   const resetTargetCustomerAge = useResetAtom(targetCustomerAgeAtom);
   const resetTargetMonthlySales = useResetAtom(targetMonthlySalesAtom);
+  const resetAnalyzeId = useResetAtom(analyzeIdAtom);
   const resetAnalysisCompletedToast = useResetAtom(analysisCompletedToastAtom);
 
   const handleRestart = () => {
@@ -29,6 +30,7 @@ const useRestartDiagnosis = () => {
     resetOperatingPriority();
     resetTargetCustomerAge();
     resetTargetMonthlySales();
+    resetAnalyzeId();
     resetAnalysisCompletedToast();
     router.replace('/?step=1');
   };
