@@ -18,7 +18,7 @@ const TypeResult = ({ market, axes, interpretation }: TypeResultProps) => {
   const typeMetrics = axes.map((axis) => ({
     ...axisOptions[axis.axis][axis.code],
     code: axis.code,
-    percent: getSelectedAxisPercent(axis.code, axis.value, axis.threshold),
+    percent: getSelectedAxisPercent(axis.value, axis.threshold),
     description: axis.description,
   }));
 

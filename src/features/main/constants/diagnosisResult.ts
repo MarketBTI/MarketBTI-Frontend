@@ -58,15 +58,12 @@ export const axisOptions: Record<
   },
 };
 
-const higherValueCodes = new Set(['G', 'C', 'F', 'V']);
+export const getSelectedAxisPercent = (value: number, threshold: number) => {
+  const scale = Math.max(Math.abs(value), Math.abs(threshold));
 
-export const getSelectedAxisPercent = (code: string, value: number, threshold: number) => {
-  if (threshold === 0) return 50;
+  if (scale === 0) return 50;
 
-  const higherValuePercent = Math.min(100, Math.max(0, (value / threshold) * 50));
-  const selectedPercent = higherValueCodes.has(code)
-    ? higherValuePercent
-    : 100 - higherValuePercent;
+  const relativeDistance = Math.min(1, Math.abs(value - threshold) / scale);
 
-  return Math.round(Math.max(50, selectedPercent));
+  return Math.round(50 + relativeDistance * 50);
 };
