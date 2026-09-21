@@ -9,14 +9,14 @@ const TypeAxesSection = () => {
         title='4가지 판단 축'
         subtitle='각 축의 두 값을 조합해 16개 상권 유형을 결정합니다.'
       />
-      <ul className='flex items-center gap-4 max-w-264 w-full mx-auto max-lg:grid max-lg:grid-cols-2 max-lg:items-stretch max-sm:grid-cols-1'>
+      <ul className='mx-auto flex w-full max-w-264 items-stretch gap-5 max-lg:grid max-lg:grid-cols-2 max-lg:gap-4 max-sm:grid-cols-1'>
         {typeAxes.map(({ code, values, description }) => (
           <li
             key={code}
-            className='rounded-xl border border-primary-400 bg-primary-100 p-3 flex-1 min-w-0'
+            className='flex min-h-36 min-w-0 flex-1 flex-col rounded-2xl border border-primary-400 bg-primary-100 p-5 max-xl:p-4'
           >
-            <div className='flex items-center justify-between mb-3'>
-              <h2 className='typo-title-1 whitespace-nowrap text-primary-900'>{code}</h2>
+            <div className='mb-5 flex items-center justify-between gap-2'>
+              <h2 className='whitespace-nowrap typo-headline-1 text-primary-900'>{code}</h2>
               <div className='flex items-center gap-1 text-neutral-800'>
                 <Chip label={values[0]} />
                 <span aria-hidden='true'>·</span>
@@ -24,7 +24,7 @@ const TypeAxesSection = () => {
               </div>
             </div>
 
-            <p className='typo-caption-2 text-neutral-800'>{description}</p>
+            <p className='mt-auto typo-body-2 text-neutral-800'>{description}</p>
           </li>
         ))}
       </ul>
