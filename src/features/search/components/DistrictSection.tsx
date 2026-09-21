@@ -51,16 +51,19 @@ const DistrictSection = () => {
             <div className='flex items-center gap-1 text-neutral-900'>
               <MapPin size={20} className='shrink-0' />
               <span className='typo-body-2'>
-                {[conditions.region, conditions.district].filter(Boolean).join(' ')}
+                {[conditions.region, conditions.district].filter(Boolean).join(' · ')}
               </span>
             </div>
-            {conditions.industry && (
-              <div className='flex items-center gap-1 text-neutral-900'>
-                <BuildingComplex size={24} />
-                <span className='typo-body-1'>{conditions.industry}</span>
-              </div>
-            )}
           </div>
+          {conditions.industry && (
+            <div className='flex flex-col gap-3 rounded-xl border border-neutral-400 bg-white p-4'>
+              <p className='typo-body-1'>관련 업종</p>
+              <div className='flex items-center gap-2 text-neutral-900'>
+                <BuildingComplex size={20} className='shrink-0' />
+                <span className='typo-body-2'>{conditions.industry}</span>
+              </div>
+            </div>
+          )}
           {!conditions.district && (
             <SearchOptionList
               title='관련 지역'
