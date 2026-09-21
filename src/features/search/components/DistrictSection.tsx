@@ -186,7 +186,7 @@ const DistrictSection = () => {
               </div>
             </div>
           )}
-          {districtOptions.length > 0 && (
+          {!district && districtOptions.length > 0 && (
             <SearchOptionList
               title='관련 지역'
               options={districtOptions}
