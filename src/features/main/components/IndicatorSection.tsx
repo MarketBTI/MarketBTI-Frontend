@@ -31,12 +31,12 @@ const IndicatorSection = ({ currentStep }: IndicatorSectionProps) => {
   ];
 
   return (
-    <section className='w-50 space-y-4'>
-      <ol className='flex h-98 w-50 flex-col rounded-xl bg-neutral-100 border border-neutral-200 px-6 py-5 shadow-[0_4px_12px_0_rgba(0,0,0,0.15)]'>
+    <section className='w-50 space-y-4 max-lg:order-first max-lg:w-full'>
+      <ol className='flex h-98 w-50 flex-col rounded-xl border border-neutral-200 bg-neutral-100 px-6 py-5 shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] max-lg:h-auto max-lg:w-full max-lg:flex-row max-lg:px-3 max-lg:py-3'>
         {steps.map((step, index) => (
           <li
             className={clsx(
-              'relative flex gap-2',
+              'relative flex gap-2 max-lg:flex-1 max-lg:items-center max-lg:justify-center',
               index < steps.length - 1 ? 'flex-1' : 'shrink-0',
             )}
             key={step.title}
@@ -44,7 +44,7 @@ const IndicatorSection = ({ currentStep }: IndicatorSectionProps) => {
           >
             {index < steps.length - 1 && (
               <span
-                className='absolute top-6 bottom-0 left-2.75 w-0.5 bg-neutral-400'
+                className='absolute top-6 bottom-0 left-2.75 w-0.5 bg-neutral-400 max-lg:hidden'
                 aria-hidden='true'
               >
                 <span
@@ -78,7 +78,7 @@ const IndicatorSection = ({ currentStep }: IndicatorSectionProps) => {
               </p>
               <p
                 className={clsx(
-                  'mt-1 typo-caption-3',
+                  'mt-1 typo-caption-3 max-lg:hidden',
                   index + 1 === currentStep ? 'text-neutral-800' : 'text-neutral-600',
                 )}
               >
@@ -90,7 +90,7 @@ const IndicatorSection = ({ currentStep }: IndicatorSectionProps) => {
       </ol>
 
       <article
-        className='rounded-xl bg-primary-100 p-4 space-y-2.5 shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] border border-primary-200'
+        className='space-y-2.5 rounded-xl border border-primary-200 bg-primary-100 p-4 shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] max-lg:hidden'
         aria-labelledby='selected-conditions-title'
       >
         <h2

@@ -71,9 +71,9 @@ const SelectionSection = () => {
   };
 
   return (
-    <section className='relative w-207'>
+    <section className='relative w-207 max-lg:w-full'>
       <VillageIcon
-        className='pointer-events-none absolute right-2 bottom-full'
+        className='pointer-events-none absolute right-2 bottom-full max-lg:hidden'
         aria-hidden='true'
         focusable='false'
       />
@@ -143,7 +143,7 @@ const SelectionSection = () => {
         <Button
           label='위험 진단 시작하기'
           size='lg'
-          className='w-120'
+          className='w-120 max-sm:w-full'
           onClick={() => router.push('/?step=2')}
           disabled={!selectedRegion || !selectedDistrict || !selectedIndustry}
         />

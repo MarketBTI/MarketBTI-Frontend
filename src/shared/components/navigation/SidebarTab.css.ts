@@ -37,6 +37,17 @@ export const sidebarTab = style([
         color: vars.color.primary[900],
       },
     },
+    '@media': {
+      'screen and (max-width: 1023px)': {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        gap: '2px',
+        width: 'auto',
+        height: '56px',
+        padding: '4px 8px',
+      },
+    },
   },
 ]);
 
@@ -55,5 +66,6 @@ export const label = style({
   },
   '@media': {
     '(prefers-reduced-motion: reduce)': { transition: 'none' },
+    'screen and (max-width: 1023px)': { fontSize: '12px', lineHeight: 1.2 },
   },
 });

@@ -20,7 +20,7 @@ const Header = ({ isCollapsed }: HeaderProps) => {
   return (
     <header
       className={clsx(
-        'fixed top-0 right-0 z-10 flex h-15 items-center border-b border-neutral-300 bg-white px-4 transition-[left] duration-300 ease-in-out motion-reduce:transition-none',
+        'fixed top-0 right-0 z-10 flex h-15 items-center border-b border-neutral-300 bg-white px-4 transition-[left] duration-300 ease-in-out motion-reduce:transition-none max-lg:left-0',
         isCollapsed ? 'left-19' : 'left-70',
       )}
     >

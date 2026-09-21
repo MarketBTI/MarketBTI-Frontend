@@ -106,7 +106,7 @@ const KakaoMap = ({
   }
 
   return (
-    <div className='relative min-h-150 overflow-hidden rounded-xl bg-neutral-100'>
+    <div className='relative min-h-150 overflow-hidden rounded-xl bg-neutral-100 max-lg:min-h-120 max-sm:min-h-100'>
       <Map
         center={{ lat: 37.5172, lng: 127.0473 }}
         level={7}
@@ -127,7 +127,7 @@ const KakaoMap = ({
           ))}
       </Map>
       {marketStats && (
-        <div className='absolute top-4 right-4 z-10 w-70 drop-shadow-lg'>
+        <div className='absolute top-4 right-4 z-10 w-70 drop-shadow-lg max-sm:right-3 max-sm:left-3 max-sm:w-auto'>
           <MarketStatsCard {...marketStats} />
         </div>
       )}

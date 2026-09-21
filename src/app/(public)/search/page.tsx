@@ -4,7 +4,7 @@ import TitleHeader from '@/shared/layouts/TitleHeader';
 
 const RistSearchPage = () => {
   return (
-    <div className='flex min-h-[calc(100dvh-100px)] flex-col gap-10 overflow-x-auto rounded-xl bg-white p-8'>
+    <div className='flex min-h-[calc(100dvh-100px)] flex-col gap-10 overflow-x-auto rounded-xl bg-white p-8 max-lg:min-h-[calc(100dvh-152px)] max-lg:gap-6 max-lg:overflow-visible max-lg:p-4 max-sm:p-3'>
       <TitleHeader
         title={
           <>

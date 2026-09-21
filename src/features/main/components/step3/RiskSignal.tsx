@@ -6,7 +6,7 @@ const riskList = [
 
 const RiskSignal = () => {
   return (
-    <section className='shrink-0 rounded-xl border border-neutral-400 bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] p-4 space-y-3 w-60.5'>
+    <section className='w-60.5 shrink-0 space-y-3 rounded-xl border border-neutral-400 bg-white p-4 shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] max-md:w-full'>
       <h1 className='text-black typo-subtitle-1'>주요 위험 신호</h1>
 
       <div className='space-y-2'>

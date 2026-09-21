@@ -24,7 +24,7 @@ const SelectionGroup = ({
   return (
     <div
       aria-labelledby={titleId}
-      className='flex flex-col gap-3 rounded-xl border border-neutral-400 bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] px-5 py-6 h-49'
+      className='flex h-49 flex-col gap-3 rounded-xl border border-neutral-400 bg-white px-5 py-6 shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] max-sm:px-4 max-sm:py-5'
     >
       <article className='flex shrink-0 items-center gap-2'>
         <span
@@ -42,6 +42,7 @@ const SelectionGroup = ({
         className={clsx(
           'grid min-h-0 flex-1 gap-3 overflow-y-auto thin-scrollbar py-1 pr-2',
           step === 2 ? 'grid-cols-6' : 'grid-cols-5',
+          'max-lg:grid-cols-4 max-sm:grid-cols-2',
         )}
         aria-live='polite'
       >

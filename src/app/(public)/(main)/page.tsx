@@ -9,7 +9,7 @@ const MainPage = async ({ searchParams }: PageProps<'/'>) => {
   const currentStep = step === '2' ? 2 : step === '3' ? 3 : 1;
 
   return (
-    <div className='flex min-h-[calc(100dvh-100px)] flex-col gap-10 overflow-x-auto rounded-xl bg-white p-8'>
+    <div className='flex min-h-[calc(100dvh-100px)] flex-col gap-10 overflow-x-auto rounded-xl bg-white p-8 max-lg:min-h-[calc(100dvh-152px)] max-lg:gap-6 max-lg:overflow-visible max-lg:p-4 max-sm:p-3'>
       {currentStep === 1 && (
         <TitleHeader
           title={
@@ -31,7 +31,7 @@ const MainPage = async ({ searchParams }: PageProps<'/'>) => {
         />
       )}
 
-      <div className='grid min-w-265 flex-1 grid-cols-[minmax(0,1fr)_200px] items-start gap-8'>
+      <div className='grid min-w-265 flex-1 grid-cols-[minmax(0,1fr)_200px] items-start gap-8 max-lg:min-w-0 max-lg:grid-cols-1 max-lg:gap-6'>
         <div className='flex min-w-0 justify-center'>
           {currentStep === 1 && <SelectionSection />}
           {currentStep === 2 && <DiagnosingSection />}

@@ -26,14 +26,14 @@ const PreferredOperationsSection = () => {
   const [targetMonthlySales, setTargetMonthlySales] = useAtom(targetMonthlySalesAtom);
 
   return (
-    <section className='mt-5 flex flex-col gap-4 rounded-xl border border-primary-200 bg-primary-100 px-5 py-6 shadow-[0_4px_12px_0_rgba(0,0,0,0.15)]'>
+    <section className='mt-5 flex flex-col gap-4 rounded-xl border border-primary-200 bg-primary-100 px-5 py-6 shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] max-sm:px-4 max-sm:py-5'>
       <h2 className='typo-title-2 text-black'>선호 운영 기준</h2>
 
       <PreferenceCard step={1} title='운영 우선 순위'>
-        <div className='flex items-center gap-4 px-4'>
+        <div className='flex items-center gap-4 px-4 max-sm:gap-2 max-sm:px-0'>
           <span
             className={clsx(
-              'shrink-0 rounded-lg px-3 py-4 typo-body-2',
+              'shrink-0 rounded-lg px-3 py-4 typo-body-2 max-sm:px-2 max-sm:py-3',
               operatingPriority < 3
                 ? 'bg-primary-200 text-primary-900'
                 : 'bg-neutral-100 text-neutral-900',
@@ -93,7 +93,7 @@ const PreferredOperationsSection = () => {
           </div>
           <span
             className={clsx(
-              'shrink-0 rounded-lg px-3 py-4 typo-body-2',
+              'shrink-0 rounded-lg px-3 py-4 typo-body-2 max-sm:px-2 max-sm:py-3',
               operatingPriority > 3
                 ? 'bg-primary-200 text-primary-900'
                 : 'bg-neutral-100 text-neutral-900',
@@ -112,7 +112,7 @@ const PreferredOperationsSection = () => {
         title='희망 고객 연령'
         description='주로 어떤 연령대 고객을 타깃으로 하고 싶나요?'
       >
-        <div className='grid grid-cols-6 gap-3'>
+        <div className='grid grid-cols-6 gap-3 max-md:grid-cols-3 max-sm:grid-cols-2'>
           {customerAgeOptions.map((age) => (
             <Button
               key={age}
@@ -131,7 +131,7 @@ const PreferredOperationsSection = () => {
         title='목표 월평균 매출'
         description='매장의 월평균 목표 매출을 선택해 주세요.'
       >
-        <div className='grid grid-cols-3 gap-3'>
+        <div className='grid grid-cols-3 gap-3 max-md:grid-cols-2 max-sm:grid-cols-1'>
           {monthlySalesOptions.map((sales) => (
             <Button
               key={sales}

@@ -29,12 +29,15 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
   return (
     <aside
       className={clsx(
-        'fixed inset-y-0 left-0 z-20 flex h-dvh flex-col overflow-x-hidden overflow-y-auto border-r border-neutral-300 bg-white transition-[width] duration-300 ease-in-out motion-reduce:transition-none',
+        'fixed inset-y-0 left-0 z-20 flex h-dvh flex-col overflow-x-hidden overflow-y-auto border-r border-neutral-300 bg-white transition-[width] duration-300 ease-in-out motion-reduce:transition-none max-lg:inset-x-0 max-lg:top-auto max-lg:h-17 max-lg:w-full max-lg:overflow-hidden max-lg:border-t max-lg:border-r-0',
         isCollapsed ? 'w-19' : 'w-70',
       )}
     >
       <div
-        className={clsx('flex h-15 shrink-0 items-center', isCollapsed ? 'px-2.5' : 'pl-4 pr-2.5')}
+        className={clsx(
+          'flex h-15 shrink-0 items-center max-lg:hidden',
+          isCollapsed ? 'px-2.5' : 'pl-4 pr-2.5',
+        )}
       >
         {isCollapsed ? (
           <button
@@ -66,7 +69,11 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         )}
       </div>
 
-      <nav id='sidebar-navigation' aria-label='주요 메뉴' className='flex flex-col gap-3 px-4 mt-4'>
+      <nav
+        id='sidebar-navigation'
+        aria-label='주요 메뉴'
+        className='mt-4 flex flex-col gap-3 px-4 max-lg:mt-0 max-lg:h-full max-lg:flex-row max-lg:items-center max-lg:justify-around max-lg:gap-2 max-lg:px-3'
+      >
         <SidebarTab
           label='상권 진단'
           icon={<ChartLine size={18} />}
@@ -89,7 +96,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
 
       <div
         className={clsx(
-          'mt-auto shrink-0 flex items-center justify-center pb-4 transition-opacity duration-200 ease-in-out motion-reduce:transition-none',
+          'mt-auto shrink-0 flex items-center justify-center pb-4 transition-opacity duration-200 ease-in-out motion-reduce:transition-none max-lg:hidden',
           isCollapsed ? 'pointer-events-none opacity-0' : 'opacity-100',
         )}
         aria-hidden={isCollapsed}

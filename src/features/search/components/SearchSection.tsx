@@ -11,7 +11,7 @@ const SearchSection = () => {
 
   return (
     <form
-      className='mx-auto flex w-full max-w-264 items-center gap-3'
+      className='mx-auto flex w-full max-w-264 items-center gap-3 max-sm:flex-col'
       onSubmit={(event) => {
         event.preventDefault();
         setSubmittedSearchValue(searchValue.trim());
@@ -22,7 +22,7 @@ const SearchSection = () => {
         onChange={setSearchValue}
         placeholder='시·구·군 및 업종명을 정확히 입력해주세요.'
       />
-      <Button type='submit' label='검색' className='w-20' />
+      <Button type='submit' label='검색' className='w-20 max-sm:w-full' />
     </form>
   );
 };

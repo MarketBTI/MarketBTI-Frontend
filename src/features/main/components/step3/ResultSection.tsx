@@ -15,17 +15,17 @@ const ResultSection = () => {
     useResultImageDownload();
 
   return (
-    <section className='w-207'>
+    <section className='w-207 max-lg:w-full'>
       <AnalysisCompletedToast />
       <div ref={resultRef} className='-m-3 p-3'>
         <TypeResult />
-        <div className='flex items-stretch gap-4 mt-4'>
+        <div className='mt-4 flex items-stretch gap-4 max-md:flex-col'>
           <ConsumeGraph />
           <RiskSignal />
         </div>
       </div>
 
-      <div className='grid grid-cols-2 gap-3 mt-10'>
+      <div className='mt-10 grid grid-cols-2 gap-3 max-sm:grid-cols-1'>
         <Button
           label='다시 진단하기'
           icon={<RotateCw />}

@@ -15,13 +15,13 @@ const TypeGridSection = () => {
   };
 
   return (
-    <section className='flex flex-col gap-10 rounded-xl bg-white p-8 min-h-[calc(100dvh-400px)]'>
+    <section className='flex min-h-[calc(100dvh-400px)] flex-col gap-10 rounded-xl bg-white p-8 max-lg:gap-6 max-lg:p-4 max-sm:p-3'>
       <TitleHeader
         title='16가지 상권 유형'
         subtitle='각 카드를 클릭해서 유형의 상세 정보를 확인해보세요.'
       />
 
-      <div className='grid grid-cols-4 items-center gap-4 max-w-264 w-full mx-auto'>
+      <div className='mx-auto grid w-full max-w-264 grid-cols-4 items-center gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1'>
         {marketTypes.map(({ type, imageSrc, name, description, axes }) => (
           <button
             key={type}

@@ -6,7 +6,7 @@ import { typeMetrics } from '../../mocks/resultData';
 const TypeResult = () => {
   return (
     <section className='rounded-xl border border-neutral-400 bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] p-4 space-y-3'>
-      <div className='flex items-stretch gap-6 py-3 pl-7'>
+      <div className='flex items-stretch gap-6 py-3 pl-7 max-md:flex-col max-md:pl-0'>
         <article className='inline-flex shrink-0 flex-col items-center'>
           <Image
             src={GCFV}
@@ -19,13 +19,13 @@ const TypeResult = () => {
         </article>
 
         <article
-          className='grid min-w-0 flex-1 grid-cols-2 grid-rows-2 gap-3'
+          className='grid min-w-0 flex-1 grid-cols-2 grid-rows-2 gap-3 max-sm:grid-cols-1 max-sm:grid-rows-none'
           aria-label='상권 유형별 분석 비율'
         >
           {typeMetrics.map((metric) => (
             <div
               key={metric.code}
-              className='flex min-w-0 flex-col justify-between gap-3 rounded-xl border border-primary-300 px-3 py-2'
+              className='flex min-w-0 flex-col justify-between gap-3 rounded-xl border border-primary-300 px-3 py-2 max-sm:px-2'
             >
               <div className='flex items-center gap-2'>
                 <div className='flex h-13 min-w-13 shrink-0 flex-col items-center justify-center rounded-lg bg-primary-200 px-2'>

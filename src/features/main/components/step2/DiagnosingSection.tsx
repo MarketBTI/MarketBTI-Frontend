@@ -57,10 +57,10 @@ const DiagnosingSection = () => {
 
   return (
     <section
-      className='-mt-20 flex w-full flex-col items-center pb-8'
+      className='-mt-20 flex w-full flex-col items-center pb-8 max-lg:mt-0 max-sm:px-1'
       aria-label='상권 위험 진단 중'
     >
-      <div className='relative isolate h-80 w-full' aria-hidden='true'>
+      <div className='relative isolate h-80 w-full max-sm:h-64' aria-hidden='true'>
         <div className='absolute top-[68%] left-1/2 z-0 -translate-x-1/2 -translate-y-1/2'>
           <motion.div
             animate={

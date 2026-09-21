@@ -15,7 +15,7 @@ const PublicLayoutShell = ({ children }: PublicLayoutShellProps) => {
   return (
     <div
       className={clsx(
-        'min-h-dvh transition-[padding-left] duration-300 ease-in-out motion-reduce:transition-none',
+        'min-h-dvh transition-[padding-left] duration-300 ease-in-out motion-reduce:transition-none max-lg:pl-0',
         isCollapsed ? 'pl-19' : 'pl-70',
       )}
     >
@@ -26,7 +26,9 @@ const PublicLayoutShell = ({ children }: PublicLayoutShellProps) => {
       <Suspense fallback={null}>
         <Header isCollapsed={isCollapsed} />
       </Suspense>
-      <main className='min-h-dvh bg-neutral-100 px-5 pt-20 pb-5'>{children}</main>
+      <main className='min-h-dvh bg-neutral-100 px-5 pt-20 pb-5 max-lg:px-3 max-lg:pt-18 max-lg:pb-20'>
+        {children}
+      </main>
     </div>
   );
 };
