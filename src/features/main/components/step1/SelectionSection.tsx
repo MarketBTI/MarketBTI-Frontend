@@ -13,8 +13,11 @@ import Button from '@/shared/components/button/Button';
 import ErrorState from '@/shared/components/feedback/ErrorState';
 import LoadingSpinner from '@/shared/components/feedback/LoadingSpinner';
 import { useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import { getFindIndustries, getFindRegions } from '@/features/main/api/diagnosis';
+import {
+  useIndustriesQuery,
+  useSidoRegionsQuery,
+  useSigunguRegionsQuery,
+} from '@/features/main/hooks';
 
 const SelectionSection = () => {
   const router = useRouter();
@@ -24,58 +27,35 @@ const SelectionSection = () => {
   const [selectedIndustry, setSelectedIndustry] = useAtom(selectedIndustryAtom);
 
   const {
-    data: regionsResponse,
+    data: regions = [],
     isPending: isRegionsPending,
     isError: isRegionsError,
     refetch: refetchRegions,
-  } = useQuery({
-    queryKey: ['regions', 'sido'],
-    queryFn: () => getFindRegions(),
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
-  });
+  } = useSidoRegionsQuery();
 
-  const regionOptions = regionsResponse?.result.map(({ sido_name }) => sido_name) ?? [];
+  const regionOptions = regions.map(({ sido_name }) => sido_name);
 
   const {
-    data: districtsResponse,
+    data: districts = [],
     isPending: isDistrictsPending,
     isError: isDistrictsError,
     refetch: refetchDistricts,
-  } = useQuery({
-    queryKey: ['regions', 'sigungu', selectedRegion],
-    queryFn: () => getFindRegions(selectedRegion ?? undefined),
-    enabled: Boolean(selectedRegion),
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
-  });
+  } = useSigunguRegionsQuery(selectedRegion);
 
-  const districtOptions =
-    districtsResponse?.result.flatMap((region) =>
-      'sigungu_name' in region ? [region.sigungu_name] : [],
-    ) ?? [];
+  const districtOptions = districts.map(({ sigungu_name }) => sigungu_name);
 
-  const selectedRegionCode = districtsResponse?.result.flatMap((region) =>
-    'sigungu_name' in region && region.sigungu_name === selectedDistrict
-      ? [region.region_code]
-      : [],
-  )[0];
+  const selectedRegionCode = districts.find(
+    ({ sigungu_name }) => sigungu_name === selectedDistrict,
+  )?.region_code;
 
   const {
-    data: industriesResponse,
+    data: industries = [],
     isPending: isIndustriesPending,
     isError: isIndustriesError,
     refetch: refetchIndustries,
-  } = useQuery({
-    queryKey: ['industries', selectedRegionCode],
-    queryFn: () => getFindIndustries(selectedRegionCode ?? ''),
-    enabled: Boolean(selectedRegionCode),
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
-  });
+  } = useIndustriesQuery(selectedRegionCode);
 
-  const industryOptions =
-    industriesResponse?.result.map(({ industry_display_name }) => industry_display_name) ?? [];
+  const industryOptions = industries.map(({ industry_display_name }) => industry_display_name);
 
   const selectRegion = (region: string) => {
     if (region === selectedRegion) return;
