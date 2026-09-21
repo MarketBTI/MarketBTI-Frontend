@@ -2,6 +2,7 @@ import { axiosInstance } from '@/app/api/api';
 import type {
   RequestDiagnosis,
   ResponseDiagnosis,
+  ResponseDiagnosisResult,
   ResponseDiagnosisStatus,
   ResponseFindRegions,
   ResponseIndustries,
@@ -32,6 +33,14 @@ export const postDiagnoses = async (body: RequestDiagnosis): Promise<ResponseDia
 export const getDiagnosesStatus = async (analyze_id: string): Promise<ResponseDiagnosisStatus> => {
   const { data } = await axiosInstance.get<ResponseDiagnosisStatus>(
     `/diagnoses/${analyze_id}/status`,
+  );
+
+  return data;
+};
+
+export const getDiagnosesResult = async (analyze_id: string): Promise<ResponseDiagnosisResult> => {
+  const { data } = await axiosInstance.get<ResponseDiagnosisResult>(
+    `/diagnoses/${analyze_id}/result`,
   );
 
   return data;

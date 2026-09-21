@@ -2,6 +2,8 @@
 
 import { Suspense, useState, type ReactNode } from 'react';
 import clsx from 'clsx';
+import { Provider } from 'jotai';
+import { usePathname } from 'next/navigation';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
@@ -11,6 +13,7 @@ interface PublicLayoutShellProps {
 
 const PublicLayoutShell = ({ children }: PublicLayoutShellProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const pathname = usePathname();
 
   return (
     <div
@@ -27,7 +30,7 @@ const PublicLayoutShell = ({ children }: PublicLayoutShellProps) => {
         <Header isCollapsed={isCollapsed} />
       </Suspense>
       <main className='min-h-dvh bg-neutral-100 px-5 pt-20 pb-5 max-lg:px-3 max-lg:pt-18 max-lg:pb-20'>
-        {children}
+        <Provider key={pathname}>{children}</Provider>
       </main>
     </div>
   );
