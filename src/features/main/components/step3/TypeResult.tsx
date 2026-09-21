@@ -1,21 +1,41 @@
 import { BookAlert } from 'lucide-react';
 import Image from 'next/image';
-import GCFV from '@/assets/image/GCFV.webp';
-import { typeMetrics } from '../../mocks/resultData';
+import {
+  axisOptions,
+  getSelectedAxisPercent,
+  marketBtiCharacters,
+} from '@/features/main/constants/diagnosisResult';
+import type { DiagnosisAxis, DiagnosisMarket } from '@/features/main/types/diagnosis';
 
-const TypeResult = () => {
+interface TypeResultProps {
+  market: DiagnosisMarket;
+  axes: DiagnosisAxis[];
+  interpretation: string;
+}
+
+const TypeResult = ({ market, axes, interpretation }: TypeResultProps) => {
+  const character = marketBtiCharacters[market.market_bti];
+  const typeMetrics = axes.map((axis) => ({
+    ...axisOptions[axis.axis][axis.code],
+    code: axis.code,
+    percent: getSelectedAxisPercent(axis.code, axis.value, axis.threshold),
+    description: axis.description,
+  }));
+
   return (
     <section className='rounded-xl border border-neutral-400 bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] p-4 space-y-3'>
       <div className='flex items-stretch gap-6 py-3 pl-7 max-md:flex-col max-md:pl-0'>
         <article className='inline-flex shrink-0 flex-col items-center'>
-          <Image
-            src={GCFV}
-            alt='GCFV 유형 캐릭터'
-            width={160}
-            height={160}
-          />
-          <h1 className='text-[40px] font-bold text-black'>GCFV</h1>
-          <p className='typo-body-1 text-primary-900'>(인플루언서 원툴형)</p>
+          {character && (
+            <Image
+              src={character}
+              alt={`${market.market_bti} 유형 캐릭터`}
+              width={160}
+              height={160}
+            />
+          )}
+          <h1 className='text-[40px] font-bold text-black'>{market.market_bti}</h1>
+          <p className='typo-body-1 text-primary-900'>({market.type_name})</p>
         </article>
 
         <article
@@ -71,9 +91,7 @@ const TypeResult = () => {
           <p className='typo-body-1'>AI 해석</p>
         </div>
         <p className='text-neutral-800 typo-body-2'>
-          현재 상권은 특정 인플루언서나 트렌트에 의존하는 구조로, 트렌드가 식으면 매출이 급격히
-          떨어질 위험이 큽니다. 주요 고객층이 한정되어 있고, 방문 빈도가 낮아 안정적인 수익구조를
-          기대하기 어렵습니다. 특히 매출 변동성이 크기 때문에, 리스크 분산 전략이 필요합니다.
+          {interpretation}
         </p>
       </div>
     </section>

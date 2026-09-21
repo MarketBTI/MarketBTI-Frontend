@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import TypeResult from './TypeResult';
 import AnalysisCompletedToast from './AnalysisCompletedToast';
 import ConsumeGraph from './ConsumeGraph';
@@ -7,22 +9,51 @@ import RiskSignal from './RiskSignal';
 import Button from '@/shared/components/button/Button';
 import Toast from '@/shared/components/toast/Toast';
 import { Download, RotateCw } from 'lucide-react';
-import { useRestartDiagnosis, useResultImageDownload } from '@/features/main/hooks';
+import { useAtomValue } from 'jotai';
+import { analyzeIdAtom } from '@/features/main/atoms/analysisAtoms';
+import {
+  useDiagnosisResultQuery,
+  useRestartDiagnosis,
+  useResultImageDownload,
+} from '@/features/main/hooks';
 
 const ResultSection = () => {
+  const router = useRouter();
+  const analyzeId = useAtomValue(analyzeIdAtom);
+  const { data: diagnosisResponse } = useDiagnosisResultQuery(analyzeId);
+  const diagnosisResult = diagnosisResponse?.result;
+
   const handleRestart = useRestartDiagnosis();
   const { resultRef, isDownloading, downloadStatus, closeDownloadToast, handleDownloadImage } =
     useResultImageDownload();
+
+  useEffect(() => {
+    if (!analyzeId) router.replace('/?step=1');
+  }, [analyzeId, router]);
+
+  if (!analyzeId) return null;
 
   return (
     <section className='w-207 max-lg:w-full'>
       <AnalysisCompletedToast />
       <div ref={resultRef} className='-m-3 p-3'>
-        <TypeResult />
-        <div className='mt-4 flex items-stretch gap-4 max-md:flex-col'>
-          <ConsumeGraph />
-          <RiskSignal />
-        </div>
+        {diagnosisResult && (
+          <>
+            <TypeResult
+              market={diagnosisResult.market}
+              axes={diagnosisResult.axes}
+              interpretation={diagnosisResult.interpretation}
+            />
+            <div className='mt-4 flex items-stretch gap-4 max-md:flex-col'>
+              <ConsumeGraph
+                data={diagnosisResult.consumptionFlow}
+                market={diagnosisResult.market}
+                warningMonth={diagnosisResult.volatility.warningMonth}
+              />
+              <RiskSignal riskSignals={diagnosisResult.risk_signals} />
+            </div>
+          </>
+        )}
       </div>
 
       <div className='mt-10 grid grid-cols-2 gap-3 max-sm:grid-cols-1'>

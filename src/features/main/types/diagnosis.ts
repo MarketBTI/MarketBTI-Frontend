@@ -53,8 +53,8 @@ export type DiagnosisAxis = {
 
 export type DiagnosisConsumptionFlow = {
   amount: number;
-  changeAmount?: number;
-  changeRate?: number;
+  changeAmount: number | null;
+  changeRate: number | null;
   yearMonth: string;
 };
 

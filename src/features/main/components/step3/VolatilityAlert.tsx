@@ -3,14 +3,13 @@ import type { Ref } from 'react';
 interface VolatilityAlertProps {
   ref: Ref<HTMLDivElement>;
   month: number;
-  day: number;
 }
 
-const VolatilityAlert = ({ ref, month, day }: VolatilityAlertProps) => (
+const VolatilityAlert = ({ ref, month }: VolatilityAlertProps) => (
   <div
     ref={ref}
     className='pointer-events-none invisible absolute z-10'
-    aria-label={month + '월 ' + day + '일 변동성 경보'}
+    aria-label={month + '월 변동성 경보'}
   >
     <span className='absolute -left-3 -top-3 flex size-6 items-center justify-center rounded-full bg-semantic-100/70'>
       <span className='size-2 rounded-full border border-semantic-600 bg-white' />

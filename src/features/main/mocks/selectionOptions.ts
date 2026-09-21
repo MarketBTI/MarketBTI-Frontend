@@ -235,8 +235,6 @@ export const districtsByRegion: Record<string, readonly string[]> = {
   ],
 };
 
-export const regionOptions = Object.keys(districtsByRegion);
-
 export const industryOptions = [
   '대형 할인점',
   '편의점',

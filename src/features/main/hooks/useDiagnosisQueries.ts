@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import {
+  getDiagnosesResult,
   getDiagnosesStatus,
   getFindIndustries,
   getFindRegions,
@@ -57,4 +58,11 @@ export const useDiagnosisStatusQuery = (analyzeId: string | null) =>
     enabled: Boolean(analyzeId),
     refetchInterval: ({ state }) =>
       state.data?.result.status === 'Pending' ? 1000 : false,
+  });
+
+export const useDiagnosisResultQuery = (analyzeId: string | null) =>
+  useQuery({
+    queryKey: ['diagnoses', analyzeId, 'result'],
+    queryFn: () => getDiagnosesResult(analyzeId ?? ''),
+    enabled: Boolean(analyzeId),
   });
