@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Map, Polygon, useKakaoLoader } from 'react-kakao-maps-sdk';
+import MarketStatsCard, { type MarketStatsCardProps } from './MarketStatsCard';
 
 interface BoundaryPoint {
   lat: number;
@@ -16,9 +17,14 @@ interface DistrictBoundaryResponse {
 interface KakaoMapProps {
   address?: string;
   showBoundary?: boolean;
+  marketStats?: MarketStatsCardProps;
 }
 
-const KakaoMap = ({ address = '서울특별시 강남구', showBoundary = false }: KakaoMapProps) => {
+const KakaoMap = ({
+  address = '서울특별시 강남구',
+  showBoundary = false,
+  marketStats,
+}: KakaoMapProps) => {
   const [loading, error] = useKakaoLoader({
     appkey: process.env.NEXT_KAKAO_MAP_KEY!,
     libraries: ['services'],
@@ -120,6 +126,11 @@ const KakaoMap = ({ address = '서울특별시 강남구', showBoundary = false 
             />
           ))}
       </Map>
+      {marketStats && (
+        <div className='absolute top-4 right-4 z-10 w-70 drop-shadow-lg'>
+          <MarketStatsCard {...marketStats} />
+        </div>
+      )}
       {showBoundary && boundaryError && (
         <p className='absolute top-4 left-1/2 z-10 -translate-x-1/2 rounded-lg bg-white px-4 py-3 text-semantic-800 shadow typo-caption-2'>
           {boundaryError}

@@ -13,7 +13,7 @@ const SectionNav = ({ title, subTitle, subStep = false }: SectionNavProps) => {
       <span>{title}</span>
       {subStep && (
         <span className={styles.icon} aria-hidden='true'>
-          <ChevronRight size={24} />
+          <ChevronRight size={20} />
         </span>
       )}
       {subStep && <span>{subTitle}</span>}

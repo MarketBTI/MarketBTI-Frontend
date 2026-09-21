@@ -69,19 +69,19 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
       <nav id='sidebar-navigation' aria-label='주요 메뉴' className='flex flex-col gap-3 px-4 mt-4'>
         <SidebarTab
           label='상권 진단'
-          icon={<ChartLine size={20} />}
+          icon={<ChartLine size={18} />}
           href='/'
           isCollapsed={isCollapsed}
         />
         <SidebarTab
           label='유형 사전'
-          icon={<BookOpen size={20} />}
+          icon={<BookOpen size={18} />}
           href='/dictionary'
           isCollapsed={isCollapsed}
         />
         <SidebarTab
           label='상권 탐색'
-          icon={<MapPin size={20} />}
+          icon={<MapPin size={18} />}
           href='/search'
           isCollapsed={isCollapsed}
         />

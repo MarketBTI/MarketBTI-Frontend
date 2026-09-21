@@ -7,7 +7,6 @@ import { districtsByRegion, industryOptions } from '@/features/main/mocks/select
 import { BuildingComplex, MapPin } from 'lucide-react';
 import KakaoMap from './KakaoMap';
 import SearchOptionList from './SearchOptionList';
-import MarketStatsCard from './MarketStatsCard';
 
 const DistrictSection = () => {
   const result = useAtomValue(searchResultAtom);
@@ -40,6 +39,7 @@ const DistrictSection = () => {
 
   const { conditions } = result;
   const address = [conditions.region, district].filter(Boolean).join(' ');
+  const hasDistrict = Boolean(district);
   const hasMarketStats = Boolean(district && industry);
   return (
     <section className='mx-auto flex w-full max-w-264 flex-1 flex-col'>
@@ -49,8 +49,8 @@ const DistrictSection = () => {
           <div className='flex flex-col gap-3 rounded-xl border border-neutral-400 bg-white p-4'>
             <p className='typo-body-1'>검색 범위</p>
             <div className='flex items-center gap-1 text-neutral-900'>
-              <MapPin size={24} className='shrink-0' />
-              <span className='typo-body-1'>
+              <MapPin size={20} className='shrink-0' />
+              <span className='typo-body-2'>
                 {[conditions.region, conditions.district].filter(Boolean).join(' ')}
               </span>
             </div>
@@ -82,11 +82,15 @@ const DistrictSection = () => {
               industry
             />
           )}
-          {hasMarketStats && (
-            <MarketStatsCard region={conditions.region} district={district} industry={industry} />
-          )}
         </section>
-        <KakaoMap key={address} address={address} showBoundary={hasMarketStats} />
+        <KakaoMap
+          key={address}
+          address={address}
+          showBoundary={hasDistrict}
+          marketStats={
+            hasMarketStats ? { region: conditions.region, district, industry } : undefined
+          }
+        />
       </div>
     </section>
   );

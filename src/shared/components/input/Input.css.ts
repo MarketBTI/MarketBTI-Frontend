@@ -23,7 +23,7 @@ export const icon = style({
 });
 
 export const inputStyles = style([
-  textStyles.body3,
+  textStyles.body2,
   {
     flex: 1,
     width: '100%',
@@ -33,8 +33,8 @@ export const inputStyles = style([
     border: 0,
     outline: 'none',
     backgroundColor: 'transparent',
-    color: vars.color.neutral[900],
-    '::placeholder': { color: vars.color.neutral[700], opacity: 1 },
+    color: vars.color.black,
+    '::placeholder': { color: vars.color.neutral[600], opacity: 1 },
     selectors: {
       '&::-webkit-search-cancel-button': { display: 'none' },
     },

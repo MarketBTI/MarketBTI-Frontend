@@ -11,9 +11,9 @@ export const iconWrapper = style({
 });
 
 const buttonSizeStyles = {
-  sm: style([textStyles.body2, { height: '36px' }]),
-  md: style([textStyles.subtitle2, { height: '44px' }]),
-  lg: style([textStyles.title3, { height: '52px' }]),
+  sm: style([textStyles.caption2, { height: '36px' }]),
+  md: style([textStyles.body2, { height: '44px' }]),
+  lg: style([textStyles.subtitle2, { height: '52px' }]),
 };
 
 export const buttonRecipe = recipe({
