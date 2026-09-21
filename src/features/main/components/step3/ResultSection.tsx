@@ -12,20 +12,17 @@ import Toast from '@/shared/components/toast/Toast';
 import { Download, RotateCw } from 'lucide-react';
 import { useAtomValue } from 'jotai';
 import { analyzeIdAtom } from '@/features/main/atoms/analysisAtoms';
-import {
-  useDiagnosisResultQuery,
-  useRestartDiagnosis,
-  useResultImageDownload,
-} from '@/features/main/hooks';
+import { useDiagnosisResultQuery, useResultImageDownload } from '@/features/main/hooks';
 
 const ResultSection = () => {
   const router = useRouter();
   const analyzeId = useAtomValue(analyzeIdAtom);
+
   const { data: diagnosisResponse } = useDiagnosisResultQuery(analyzeId);
+
   const diagnosisResult = diagnosisResponse?.result;
   const hasInsufficientData = diagnosisResponse?.result === null;
 
-  const handleRestart = useRestartDiagnosis();
   const { resultRef, isDownloading, downloadStatus, closeDownloadToast, handleDownloadImage } =
     useResultImageDownload();
 
@@ -76,7 +73,7 @@ const ResultSection = () => {
             icon={<RotateCw />}
             size='lg'
             variant='outline'
-            onClick={handleRestart}
+            onClick={() => router.replace('/?step=1')}
             disabled={isDownloading}
             className={hasInsufficientData ? 'w-120 max-sm:w-full' : undefined}
           />

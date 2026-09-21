@@ -1,20 +1,20 @@
 'use client';
 
 import { useAtom, useSetAtom } from 'jotai';
-import { searchValueAtom, submittedSearchValueAtom } from '@/features/search/atoms/searchAtoms';
+import { searchValueAtom, submitSearchAtom } from '@/features/search/atoms/searchAtoms';
 import Button from '@/shared/components/button/Button';
 import Input from '@/shared/components/input/Input';
 
 const SearchSection = () => {
   const [searchValue, setSearchValue] = useAtom(searchValueAtom);
-  const setSubmittedSearchValue = useSetAtom(submittedSearchValueAtom);
+  const submitSearch = useSetAtom(submitSearchAtom);
 
   return (
     <form
       className='mx-auto flex w-full max-w-264 items-center gap-3 max-sm:flex-col'
       onSubmit={(event) => {
         event.preventDefault();
-        setSubmittedSearchValue(searchValue.trim());
+        submitSearch(searchValue);
       }}
     >
       <Input

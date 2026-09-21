@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import proj4 from 'proj4';
-import { districtsByRegion } from '@/features/main/mocks/selectionOptions';
 
 const SGIS_AUTH_URL = 'https://sgisapi.kostat.go.kr/OpenAPI3/auth/authentication.json';
 const SGIS_BOUNDARY_URL = 'https://sgisapi.kostat.go.kr/OpenAPI3/boundary/hadmarea.geojson';
@@ -102,8 +101,7 @@ export const GET = async (request: NextRequest) => {
   if (
     !/^\d{4}$/.test(year) ||
     (region
-      ? !Object.hasOwn(districtsByRegion, region) ||
-        (district !== '' && !districtsByRegion[region].includes(district))
+      ? region.length > 30 || district.length > 30
       : !/^\d{2,8}$/.test(admCd))
   ) {
     return NextResponse.json(
@@ -139,7 +137,7 @@ export const GET = async (request: NextRequest) => {
         );
       admCd = matched.cd;
     }
-    const lowSearch = region && district && district !== '세종시 전체' ? '1' : '0';
+    const lowSearch = region && district && district !== region ? '1' : '0';
     const url = new URL(SGIS_BOUNDARY_URL);
     url.searchParams.set('accessToken', accessToken);
     url.searchParams.set('year', year);
@@ -162,7 +160,7 @@ export const GET = async (request: NextRequest) => {
     // Match within the selected province, and include all constituent wards of a city.
     const features =
       data.features?.filter((feature) => {
-        if (!region || !district || district === '세종시 전체') return true;
+        if (!region || !district || district === region) return true;
         const name = feature.properties.adm_nm
           .replace(new RegExp(`^(${region}|${regionAliases[region] ?? region})\\s*`), '')
           .trim();
@@ -187,7 +185,7 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json({
       admCd: features.map((feature) => feature.properties.adm_cd).join(','),
       districtName: region
-        ? [region, district].filter(Boolean).join(' ')
+        ? [region, district !== region ? district : ''].filter(Boolean).join(' ')
         : features[0].properties.adm_nm,
       polygons,
     });

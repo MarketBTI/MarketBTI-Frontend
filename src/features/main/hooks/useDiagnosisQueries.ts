@@ -1,6 +1,6 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import {
   getDiagnosesResult,
   getDiagnosesStatus,
@@ -40,6 +40,28 @@ export const useSigunguRegionsQuery = (sidoName: string | null) =>
     staleTime: STALE_TIME,
     gcTime: GC_TIME,
   });
+
+export const useAllSigunguRegionsQueries = (sidoNames: string[], enabled: boolean) => {
+  const queries = useQueries({
+    queries: sidoNames.map((sidoName) => ({
+      queryKey: ['regions', 'sigungu', sidoName],
+      queryFn: () => getFindRegions(sidoName),
+      select: (response: Awaited<ReturnType<typeof getFindRegions>>) => {
+        const regions: Region[] = response.result;
+        return regions.filter(isSigunguRegion);
+      },
+      enabled,
+      staleTime: STALE_TIME,
+      gcTime: GC_TIME,
+    })),
+  });
+
+  return {
+    data: queries.flatMap((query) => query.data ?? []),
+    isPending: enabled && queries.some((query) => query.isPending),
+    isError: enabled && queries.some((query) => query.isError),
+  };
+};
 
 export const useIndustriesQuery = (regionCode?: string) =>
   useQuery({
