@@ -102,6 +102,9 @@ const DistrictSection = () => {
     ({ industry_display_name }) => normalize(industry_display_name) === searchAfterLocation,
   )?.industry_display_name;
   const industry = selectedIndustry || parsedIndustry || '';
+  const industryData = industries.find(
+    ({ industry_display_name }) => industry_display_name === industry,
+  );
 
   const isLocationPending =
     isRegionsPending ||
@@ -149,7 +152,16 @@ const DistrictSection = () => {
   const districtOptions = [...new Set(regionDistricts.map(({ sigungu_name }) => sigungu_name))];
   const industryOptions = industries.map(({ industry_display_name }) => industry_display_name);
   const hasDistrict = Boolean(district);
-  const hasMarketStats = Boolean(district && industry);
+  const marketStats =
+    districtData && industryData
+      ? {
+          region,
+          district,
+          industry,
+          regionCode: districtData.region_code,
+          industryCode: industryData.industry_code,
+        }
+      : undefined;
 
   return (
     <section className='mx-auto flex w-full max-w-264 flex-1 flex-col'>
@@ -199,7 +211,7 @@ const DistrictSection = () => {
           key={address}
           address={address}
           showBoundary={hasDistrict}
-          marketStats={hasMarketStats ? { region, district, industry } : undefined}
+          marketStats={marketStats}
         />
       </div>
     </section>
