@@ -41,6 +41,7 @@ const DistrictSection = () => {
   const address = [conditions.region, district].filter(Boolean).join(' ');
   const hasDistrict = Boolean(district);
   const hasMarketStats = Boolean(district && industry);
+
   return (
     <section className='mx-auto flex w-full max-w-264 flex-1 flex-col'>
       <div className='grid flex-1 grid-cols-1 gap-5 lg:grid-cols-[340px_minmax(0,1fr)]'>

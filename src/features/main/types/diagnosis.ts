@@ -20,3 +20,18 @@ export type Industry = {
 };
 
 export type ResponseIndustries = CommonResponse<Industry[]>;
+
+// diagnoses
+export type RequestDiagnosis = {
+  region_code: string;
+  industry_code: string;
+  operating_priority: number;
+  target_customer_age_code: number;
+  target_monthly_sales_range: string;
+};
+
+export type ResponseDiagnosis = CommonResponse<{
+  analyzeId: string;
+  pollingIntervalMs: number;
+  status: string;
+}>;

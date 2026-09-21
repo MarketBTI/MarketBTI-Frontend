@@ -1,18 +1,27 @@
 'use client';
 
-import { useAtom } from 'jotai';
+import { useMutation } from '@tanstack/react-query';
+import { useAtom, useAtomValue } from 'jotai';
 import SelectionGroup from './SelectionGroup';
 import PreferredOperationsSection from './PreferredOperationsSection';
 import {
+  operatingPriorityAtom,
   selectedDistrictAtom,
   selectedIndustryAtom,
   selectedRegionAtom,
+  targetCustomerAgeAtom,
+  targetMonthlySalesAtom,
 } from '@/features/main/atoms/selectionAtoms';
+import { postDiagnoses } from '@/features/main/api/diagnosis';
 import { VillageIcon } from '@/assets';
 import Button from '@/shared/components/button/Button';
 import ErrorState from '@/shared/components/feedback/ErrorState';
 import LoadingSpinner from '@/shared/components/feedback/LoadingSpinner';
 import { useRouter } from 'next/navigation';
+import {
+  customerAgeCodes,
+  monthlySalesRanges,
+} from '@/features/main/constants/selectionOptions';
 import {
   useIndustriesQuery,
   useSidoRegionsQuery,
@@ -25,6 +34,9 @@ const SelectionSection = () => {
   const [selectedRegion, setSelectedRegion] = useAtom(selectedRegionAtom);
   const [selectedDistrict, setSelectedDistrict] = useAtom(selectedDistrictAtom);
   const [selectedIndustry, setSelectedIndustry] = useAtom(selectedIndustryAtom);
+  const operatingPriority = useAtomValue(operatingPriorityAtom);
+  const targetCustomerAge = useAtomValue(targetCustomerAgeAtom);
+  const targetMonthlySales = useAtomValue(targetMonthlySalesAtom);
 
   const {
     data: regions = [],
@@ -56,6 +68,27 @@ const SelectionSection = () => {
   } = useIndustriesQuery(selectedRegionCode);
 
   const industryOptions = industries.map(({ industry_display_name }) => industry_display_name);
+
+  const selectedIndustryCode = industries.find(
+    ({ industry_display_name }) => industry_display_name === selectedIndustry,
+  )?.industry_code;
+
+  const { mutate: diagnose, isPending: isDiagnosisPending } = useMutation({
+    mutationFn: postDiagnoses,
+    onSuccess: () => router.push('/?step=2'),
+  });
+
+  const startDiagnosis = () => {
+    if (!selectedRegionCode || !selectedIndustryCode) return;
+
+    diagnose({
+      region_code: selectedRegionCode,
+      industry_code: selectedIndustryCode,
+      operating_priority: operatingPriority,
+      target_customer_age_code: customerAgeCodes[targetCustomerAge],
+      target_monthly_sales_range: monthlySalesRanges[targetMonthlySales],
+    });
+  };
 
   const selectRegion = (region: string) => {
     if (region === selectedRegion) return;
@@ -141,11 +174,11 @@ const SelectionSection = () => {
       {<PreferredOperationsSection />}
       <div className='mt-10 flex justify-center'>
         <Button
-          label='위험 진단 시작하기'
+          label={isDiagnosisPending ? '위험 진단 요청 중...' : '위험 진단 시작하기'}
           size='lg'
           className='w-120 max-sm:w-full'
-          onClick={() => router.push('/?step=2')}
-          disabled={!selectedRegion || !selectedDistrict || !selectedIndustry}
+          onClick={startDiagnosis}
+          disabled={!selectedRegionCode || !selectedIndustryCode || isDiagnosisPending}
         />
       </div>
     </section>
