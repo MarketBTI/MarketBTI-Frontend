@@ -47,6 +47,7 @@ const ResultSection = () => {
               market={diagnosisResult.market}
               axes={diagnosisResult.axes}
               interpretation={diagnosisResult.interpretation}
+              score={diagnosisResult.score ?? 75}
             />
             <div className='mt-4 flex items-stretch gap-4 max-md:flex-col'>
               <ConsumeGraph

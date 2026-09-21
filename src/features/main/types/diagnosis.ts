@@ -91,6 +91,7 @@ export type DiagnosisResult = {
   interpretation_method: string;
   market: DiagnosisMarket;
   risk_signals: string[];
+  score?: number;
   volatility: DiagnosisVolatility;
 };
 
