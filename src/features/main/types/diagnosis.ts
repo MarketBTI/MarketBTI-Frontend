@@ -94,4 +94,4 @@ export type DiagnosisResult = {
   volatility: DiagnosisVolatility;
 };
 
-export type ResponseDiagnosisResult = CommonResponse<DiagnosisResult>;
+export type ResponseDiagnosisResult = CommonResponse<DiagnosisResult | null>;
