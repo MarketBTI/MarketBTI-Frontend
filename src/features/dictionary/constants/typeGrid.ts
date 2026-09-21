@@ -1,3 +1,20 @@
+import DBFS from '@/assets/image/DBFS.webp';
+import DBFV from '@/assets/image/DBFV.webp';
+import DBPS from '@/assets/image/DBPS.webp';
+import DBPV from '@/assets/image/DBPV.webp';
+import DCFS from '@/assets/image/DCFS.webp';
+import DCFV from '@/assets/image/DCFV.webp';
+import DCPS from '@/assets/image/DCPS.webp';
+import DCPV from '@/assets/image/DCPV.webp';
+import GBFS from '@/assets/image/GBFS.webp';
+import GBFV from '@/assets/image/GBFV.webp';
+import GBPS from '@/assets/image/GBPS.webp';
+import GBPV from '@/assets/image/GBPV.webp';
+import GCFS from '@/assets/image/GCFS.webp';
+import GCFV from '@/assets/image/GCFV.webp';
+import GCPS from '@/assets/image/GCPS.webp';
+import GCPV from '@/assets/image/GCPV.webp';
+
 const types = [
   'GBFS',
   'GBFV',
@@ -16,6 +33,25 @@ const types = [
   'DCPS',
   'DCPV',
 ] as const;
+
+const characterImages = {
+  DBFS,
+  DBFV,
+  DBPS,
+  DBPV,
+  DCFS,
+  DCFV,
+  DCPS,
+  DCPV,
+  GBFS,
+  GBFV,
+  GBPS,
+  GBPV,
+  GCFS,
+  GCFV,
+  GCPS,
+  GCPV,
+} as const;
 
 const axisLabels: Record<string, string> = {
   G: '성장형',
@@ -100,7 +136,7 @@ export const marketTypes = types.map((type) => {
 
   return {
     type,
-    imageSrc: `/characters/${type}.svg`,
+    imageSrc: characterImages[type],
     axes,
     ...typeDetails[type],
   };

@@ -74,7 +74,6 @@ const TypeGridSection = () => {
                 height={200}
                 className='h-auto max-w-full'
                 loading={type === 'GBFS' ? 'eager' : 'lazy'}
-                unoptimized
               />
             </span>
           </button>

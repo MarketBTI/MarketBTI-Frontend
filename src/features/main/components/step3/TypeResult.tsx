@@ -1,5 +1,6 @@
 import { BookAlert } from 'lucide-react';
 import Image from 'next/image';
+import GCFV from '@/assets/image/GCFV.webp';
 import { typeMetrics } from '../../mocks/resultData';
 
 const TypeResult = () => {
@@ -8,11 +9,10 @@ const TypeResult = () => {
       <div className='flex items-stretch gap-6 py-3 pl-7'>
         <article className='inline-flex shrink-0 flex-col items-center'>
           <Image
-            src='/characters/GCFV.svg'
+            src={GCFV}
             alt='GCFV 유형 캐릭터'
             width={160}
             height={160}
-            unoptimized
           />
           <h1 className='text-[40px] font-bold text-black'>GCFV</h1>
           <p className='typo-body-1 text-primary-900'>(인플루언서 원툴형)</p>

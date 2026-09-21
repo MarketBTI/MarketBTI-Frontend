@@ -1,4 +1,11 @@
-export const customerAgeOptions = ['10대', '20대', '30대', '40대', '50대', '60대'] as const;
+export const customerAgeOptions = [
+  '20대 미만',
+  '20대',
+  '30대',
+  '40대',
+  '50대',
+  '60대 이상',
+] as const;
 
 export const monthlySalesOptions = [
   '500만 원 미만',
