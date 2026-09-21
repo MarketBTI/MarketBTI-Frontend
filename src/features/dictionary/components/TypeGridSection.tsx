@@ -40,9 +40,9 @@ const TypeGridSection = () => {
               aria-hidden={openType !== type}
               className='absolute inset-0 flex flex-col items-center justify-center gap-1.5 rounded-xl bg-white px-9 py-6'
             >
-              <span className='text-[40px] font-bold text-black mt-2'>{type}</span>
-              <span className='typo-headline-2 text-primary-900'>{name}</span>
-              <span className='max-w-[90%] typo-body-2 text-neutral-900'>{description}</span>
+              <span className='text-[32px] font-bold text-black mt-3'>{type}</span>
+              <span className='typo-title-2 text-primary-900'>{name}</span>
+              <span className='max-w-[90%] typo-body-2 text-neutral-900 mt-1'>{description}</span>
               <span className='grid w-full grid-cols-2 gap-2.5 mt-auto'>
                 {axes.map(({ axis, label }) => (
                   <span
