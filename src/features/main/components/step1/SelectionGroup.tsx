@@ -1,6 +1,6 @@
 import Button from '@/shared/components/button/Button';
 import clsx from 'clsx';
-import { useId } from 'react';
+import { type ReactNode, useId } from 'react';
 
 interface SelectionGroupProps {
   step: number;
@@ -8,9 +8,17 @@ interface SelectionGroupProps {
   options: readonly string[];
   selected: string | null;
   onSelect: (value: string) => void;
+  status?: ReactNode;
 }
 
-const SelectionGroup = ({ step, title, options, selected, onSelect }: SelectionGroupProps) => {
+const SelectionGroup = ({
+  step,
+  title,
+  options,
+  selected,
+  onSelect,
+  status,
+}: SelectionGroupProps) => {
   const titleId = useId();
 
   return (
@@ -35,18 +43,23 @@ const SelectionGroup = ({ step, title, options, selected, onSelect }: SelectionG
           'grid min-h-0 flex-1 gap-3 overflow-y-auto thin-scrollbar py-1 pr-2',
           step === 1 ? 'grid-cols-5' : 'grid-cols-6',
         )}
+        aria-live='polite'
       >
-        {options.map((item) => (
-          <Button
-            key={item}
-            label={item}
-            selected={selected === item}
-            onClick={() => onSelect(item)}
-            variant='selection'
-            size='md'
-            className='w-full min-w-0'
-          />
-        ))}
+        {status ? (
+          <div className='col-span-full self-center'>{status}</div>
+        ) : (
+          options.map((item) => (
+            <Button
+              key={item}
+              label={item}
+              selected={selected === item}
+              onClick={() => onSelect(item)}
+              variant='selection'
+              size='md'
+              className='w-full min-w-0'
+            />
+          ))
+        )}
       </article>
     </div>
   );
