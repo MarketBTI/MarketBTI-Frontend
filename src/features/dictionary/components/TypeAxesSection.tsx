@@ -4,7 +4,7 @@ import { typeAxes } from '../constants/typeAxes';
 
 const TypeAxesSection = () => {
   return (
-    <section className='flex flex-col gap-10 rounded-xl bg-white p-8 max-lg:gap-6 max-lg:p-4 max-sm:p-3'>
+    <section className='flex flex-col gap-10 rounded-xl bg-white p-8 max-lg:gap-6 max-lg:p-4'>
       <TitleHeader
         title='4가지 판단 축'
         subtitle='각 축의 두 값을 조합해 16개 상권 유형을 결정합니다.'

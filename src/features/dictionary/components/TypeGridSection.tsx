@@ -15,7 +15,7 @@ const TypeGridSection = () => {
   };
 
   return (
-    <section className='flex min-h-[calc(100dvh-400px)] flex-col gap-10 rounded-xl bg-white p-8 max-lg:gap-6 max-lg:p-4 max-sm:p-3'>
+    <section className='flex min-h-[calc(100dvh-400px)] flex-col gap-10 rounded-xl bg-white p-8 max-lg:gap-6 max-lg:p-4'>
       <TitleHeader
         title='16가지 상권 유형'
         subtitle='각 카드를 클릭해서 유형의 상세 정보를 확인해보세요.'

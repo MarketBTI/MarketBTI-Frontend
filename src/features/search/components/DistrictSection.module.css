@@ -1,0 +1,17 @@
+.searchBackground {
+  width: 176px;
+  aspect-ratio: 289 / 284;
+  flex-shrink: 0;
+}
+
+.searchBackground > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 1024px) {
+  .searchBackground {
+    width: 289px;
+  }
+}

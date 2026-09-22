@@ -17,6 +17,7 @@ import {
 import LoadingSpinner from '@/shared/components/feedback/LoadingSpinner';
 import KakaoMap from './KakaoMap';
 import SearchOptionList from './SearchOptionList';
+import styles from './DistrictSection.module.css';
 
 const normalize = (value: string) => value.replace(/\s+/g, '');
 
@@ -131,9 +132,13 @@ const DistrictSection = () => {
         {isLocationPending ? (
           <LoadingSpinner label='검색 조건을 확인하는 중입니다.' />
         ) : !normalizedSearch ? (
-          <SearchBackgroundIcon aria-hidden='true' />
+          <span className={styles.searchBackground}>
+            <SearchBackgroundIcon width='100%' height='100%' aria-hidden='true' />
+          </span>
         ) : (
-          <SearchErrorBackgroundIcon aria-hidden='true' />
+          <span className={styles.searchBackground}>
+            <SearchErrorBackgroundIcon width='100%' height='100%' aria-hidden='true' />
+          </span>
         )}
         {!isLocationPending && (
           <p className='text-center text-neutral-900 typo-title-3'>
